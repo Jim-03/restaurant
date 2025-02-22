@@ -1,36 +1,36 @@
-const { DataTypes } = require("sequelize");
-const sequelize = require("../database/databaseConnection");
+const { DataTypes } = require('sequelize');
+const sequelize = require('../database/databaseConnection');
 
 module.exports = sequelize.define(
-  "OrderedFood",
+  'OrderedFood',
   {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrement: true,
+      autoIncrement: true
     },
     order: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: "orders",
-        key: "id",
+        model: 'orders',
+        key: 'id'
       },
-      field: "order_id",
+      field: 'order_id'
     },
     foodItem: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: "food_items",
-        key: "id",
+        model: 'food_items',
+        key: 'id'
       },
-      field: "food_id",
+      field: 'food_id'
     },
     price: {
       type: DataTypes.DOUBLE,
-      allowNull: false,
-    },
+      allowNull: false
+    }
   },
-  { tableName: "ordered_food" }
+  { tableName: 'ordered_food' }
 );

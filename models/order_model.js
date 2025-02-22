@@ -1,45 +1,45 @@
-const { DataTypes } = require("sequelize");
-const sequelize = require("../database/databaseConnection");
+const { DataTypes } = require('sequelize');
+const sequelize = require('../database/databaseConnection');
 
 module.exports = sequelize.define(
-  "Order",
+  'Order',
   {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrement: true,
+      autoIncrement: true
     },
     totalPrice: {
       type: DataTypes.DOUBLE,
       allowNull: false,
-      field: "total_price",
+      field: 'total_price'
     },
     payment: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: "payments",
-        key: "id",
-      },
+        model: 'payments',
+        key: 'id'
+      }
     },
     waiter: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: "users",
-        key: "id",
+        model: 'users',
+        key: 'id'
       },
-      field: "server_id",
+      field: 'server_id'
     },
     orderStatus: {
-      type: DataTypes.ENUM("cancelled", "processing", " completed", "unpaid"),
-      defaultValue: "processing",
+      type: DataTypes.ENUM('cancelled', 'processing', ' completed', 'unpaid'),
+      defaultValue: 'processing',
       allowNull: false,
-      field: "order_status",
-    },
+      field: 'order_status'
+    }
   },
   {
-    tableName: "orders",
-    timestamps: true,
+    tableName: 'orders',
+    timestamps: true
   }
 );
