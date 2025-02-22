@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../database/databaseConnection');
+const sequelize = require('../databaseConnection');
 
 module.exports = sequelize.define(
   'PaymentMethod',
