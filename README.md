@@ -48,13 +48,20 @@ DB_HOST=your_database_host e.g. localhost
 DB_PORT=your_database_port e.g. 3306
 ```
 3. Create a database named in `DB_NAME` above in MySQL
-4. Install dependencies
+4. Execute the module named `createDatabase.js` to create the database structure by running:
+> node createDatabase.js
+- It should output 
+```commandline
+Connected to the database
+Database & tables created!
+```
+5. Install dependencies
 ```commandline
 npm install
 ```
-5. Start the app
+6. Start the app
 ```commandline
 npx nodemon app
 ```
-6. Visit the link provided. It should be displayed as:
+7. Visit the link provided. It should be displayed as:
 > http://localhost:5123/
