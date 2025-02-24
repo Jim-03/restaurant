@@ -1,0 +1,201 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+  transition: 200ms;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+header,
+footer {
+  height: auto;
+  width: 100%;
+  background-color: blue;
+  display: flex;
+  flex-direction: row;
+}
+
+header h1 {
+  padding: 10px 30px;
+  color: white;
+  text-transform: uppercase;
+}
+
+#searchDiv {
+  margin: auto;
+}
+
+#searchDiv input,
+#searchDiv button {
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+}
+
+#searchDiv input {
+  width: 500px;
+  border-radius: 10px;
+  padding-left: 20px;
+}
+
+#searchDiv button {
+  width: 50px;
+  transition: 100ms;
+}
+
+#searchDiv button:hover {
+  transform: translateY(-5px);
+  background-color: skyblue;
+  cursor: pointer;
+}
+main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#navBar {
+  background-color: blue;
+  width: 95%;
+  margin-top: 5px;
+  border-radius: 10px;
+  position: sticky;
+  z-index: 1;
+  top: 0;
+}
+
+#navBar nav ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 5px 0;
+  list-style-type: none;
+}
+
+#navBar nav ul li {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  background-color: white;
+  padding: auto 15px 0 auto;
+  border-radius: 5px;
+  width: 130px;
+  transition: 200ms;
+}
+
+#navBar nav ul li i {
+  font-size: 20px;
+}
+
+#navBar nav ul li:hover {
+  box-shadow: 5px 5px 5px skyblue;
+  background-color: black;
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+  transform: translateY(-5px);
+  translate: -5px;
+}
+#menuHeading {
+  text-align: center;
+  text-decoration: underline;
+  padding: 10px 0;
+}
+
+#displaySection {
+  width: 99%;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  flex-grow: 1;
+  background-color: rgb(233, 233, 233);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 10px;
+}
+
+.foodItem {
+  width: 400px;
+  min-height: 300px;
+  padding: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: white;
+  font-weight: bold;
+  font-size: 20px;
+  transition: 100ms;
+}
+
+.foodItem:hover {
+  transform: translateY(-3px);
+  box-shadow: 3px 3px 3px black;
+  translate: -10px;
+  cursor: pointer;
+}
+
+.foodItem img {
+  border-radius: 10px;
+  height: 70%;
+  width: 90%;
+}
+
+.foodPrice {
+  color: green;
+}
+.addFoodToCart {
+  width: 30%;
+  height: 30px;
+  background-color: blue;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  transition: 100ms;
+}
+
+.addFoodToCart:hover {
+  cursor: pointer;
+  transform: translateY(-5px);
+  box-shadow: 5px 5px 5px black;
+  background-color: skyblue;
+  color: black;
+  font-weight: bold;
+}
+#cartButton {
+  position: fixed;
+  bottom: 50px;
+  right: 30px;
+  height: 60px;
+  width: 60px;
+  font-size: 30px;
+  color: white;
+  border-radius: 50px;
+  border: none;
+  background-color: blue;
+}
+
+#cartButton:hover {
+  transform: translateY(-5px);
+  cursor: pointer;
+  background-color: skyblue;
+  box-shadow: 10px 10px 10px blue;
+}
+footer {
+  height: auto;
+  justify-content: center;
+}
+
+footer h2 {
+  padding: 5px 30px;
+}
