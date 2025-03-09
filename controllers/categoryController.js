@@ -30,3 +30,5 @@ categoryApi.delete('/api/category/:id', (req, res) => {
       res.status(getStatusCode(response.status)).json(response);
     });
 });
+
+module.exports = categoryApi
