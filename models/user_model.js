@@ -18,11 +18,11 @@ module.exports = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false
     },
-      phone: {
-        type: DataTypes.STRING(10),
-          allowNull: false,
-          unique: true
-      },
+    phone: {
+      type: DataTypes.STRING(10),
+      allowNull: false,
+      unique: true
+    },
     email: {
       type: DataTypes.STRING(100),
       allowNull: true,
