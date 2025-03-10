@@ -31,6 +31,11 @@ module.exports = sequelize.define(
       },
       field: 'server_id'
     },
+    tableNumber: {
+      type: DataTypes.INTEGER,
+      field: 'table_number',
+      allowNull: true
+    },
     orderStatus: {
       type: DataTypes.ENUM('cancelled', 'processing', ' completed', 'unpaid'),
       defaultValue: 'processing',
