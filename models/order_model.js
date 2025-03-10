@@ -24,7 +24,7 @@ module.exports = sequelize.define(
     },
     waiter: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       references: {
         model: 'users',
         key: 'id'
