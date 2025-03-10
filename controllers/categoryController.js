@@ -31,4 +31,4 @@ categoryApi.delete('/api/category/:id', (req, res) => {
     });
 });
 
-module.exports = categoryApi
+module.exports = categoryApi;
