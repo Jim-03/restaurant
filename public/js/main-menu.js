@@ -2,13 +2,13 @@
 const tabs = document.querySelectorAll('.tab-link');
 const tabContents = document.querySelectorAll('.tab-content');
 
-function switchTab(targetTab) {
+function switchTab (targetTab) {
   tabs.forEach(t => t.classList.remove('active'));
   tabContents.forEach(content => content.classList.remove('active'));
 
   const tabElement = document.querySelector(`.tab-link[data-tab="${targetTab}"]`);
   const contentElement = document.getElementById(targetTab);
-  
+
   tabElement.classList.add('active');
   contentElement.classList.add('active');
 }
@@ -26,9 +26,9 @@ const searchInput = document.getElementById('menuSearch');
 const productGrid = document.getElementById('productGrid');
 const products = Array.from(document.querySelectorAll('.product'));
 
-searchInput.addEventListener('input', function(e) {
+searchInput.addEventListener('input', function (e) {
   const searchTerm = e.target.value.toLowerCase();
-  
+
   const filteredProducts = products
     .filter(product => {
       const productName = product.getAttribute('data-name').toLowerCase();
@@ -51,10 +51,10 @@ searchInput.addEventListener('input', function(e) {
 // Add to Cart Functionality
 const cartItemsContainer = document.getElementById('cartItems');
 const totalPriceElement = document.getElementById('totalPrice');
-let cart = [];
+const cart = [];
 let totalPrice = 0;
 
-function addCartListeners() {
+function addCartListeners () {
   const addToCartButtons = document.querySelectorAll('.product button');
   addToCartButtons.forEach(button => {
     button.removeEventListener('click', handleAddToCart);
@@ -62,7 +62,7 @@ function addCartListeners() {
   });
 }
 
-function handleAddToCart() {
+function handleAddToCart () {
   const productElement = this.parentElement;
   const productName = productElement.getAttribute('data-name');
   const productPrice = parseFloat(productElement.getAttribute('data-price'));
@@ -79,7 +79,7 @@ function handleAddToCart() {
 
 addCartListeners();
 
-function updateCart() {
+function updateCart () {
   cartItemsContainer.innerHTML = '';
   cart.forEach((item, index) => {
     const cartItem = document.createElement('div');
@@ -99,7 +99,7 @@ function updateCart() {
   totalPriceElement.textContent = `Total: KSH ${totalPrice.toFixed(2)}`;
 }
 
-function changeQuantity(index, change) {
+function changeQuantity (index, change) {
   const item = cart[index];
   item.quantity += change;
   totalPrice += change * item.price;
@@ -109,18 +109,18 @@ function changeQuantity(index, change) {
   updateCart();
 }
 
-function removeFromCart(index) {
+function removeFromCart (index) {
   totalPrice -= cart[index].price * cart[index].quantity;
   cart.splice(index, 1);
   updateCart();
 }
 
 // Placeholder Functions
-function updateDashboardStats() {
+function updateDashboardStats () {
   console.log('Stats updated');
 }
 
-function updateRecentActivities() {
+function updateRecentActivities () {
   console.log('Activities updated');
 }
 
