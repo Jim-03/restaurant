@@ -27,6 +27,10 @@ module.exports = sequelize.define(
       },
       field: 'food_id'
     },
+    quantity: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
     price: {
       type: DataTypes.DOUBLE,
       allowNull: false
