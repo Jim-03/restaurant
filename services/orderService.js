@@ -244,7 +244,8 @@ async function getByYear (year) {
  * @param {Object} order The order's data
  * @returns {Promise<{
  *     status: "rejected" | "created" | "error",
- *     message: string
+ *     message: string,
+ *     id: Number
  * }>} An object confirming if an order is added
  */
 async function add (order) {
@@ -252,22 +253,25 @@ async function add (order) {
   if (!order || Object.keys(order).length === 0) {
     return {
       status: 'rejected',
-      message: 'Provide valid order data!'
+      message: 'Provide valid order data!',
+      id: null
     };
   }
 
   try {
     // Add the order to the database
-    await repo.save(order);
+    const data = await repo.save(order);
     return {
       status: 'created',
-      message: 'Order was successfully made. Kindly wait for a response'
+      message: 'Order was successfully made. Kindly wait for a response',
+      id: data.id
     };
   } catch (e) {
     console.error(e);
     return {
       status: 'error',
-      message: 'An error has occurred while making the order. Please try again!'
+      message: 'An error has occurred while making the order. Please try again!',
+      id: null
     };
   }
 }
