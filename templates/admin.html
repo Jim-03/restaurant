@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickServe POS - Reports</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="../public/css/admin.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="sidebar">
+            <h2><i class="fas fa-chart-bar"></i> Reports</h2>
+            <ul>
+                <li><a href="#overview" class="active"><i class="fas fa-tachometer-alt"></i> Overview</a></li>
+            </ul>
+        </nav>
+        <main class="main-content">
+            <div class="header">
+                <h1><i class="fas fa-chart-line"></i> Reports Overview</h1>
+                <div class="controls">
+                    <div class="date-range">
+                        <label for="datePreset">Date Range:</label>
+                        <select id="datePreset">
+                            <option value="today">Today</option>
+                            <option value="week">This Week</option>
+                            <option value="month">This Month</option>
+                            <option value="custom">Custom Range</option>
+                        </select>
+                        <div class="custom-date" style="display: none;">
+                            <label for="start-date">Start:</label>
+                            <input type="date" id="start-date" name="start-date">
+                            <label for="end-date">End:</label>
+                            <input type="date" id="end-date" name="end-date">
+                        </div>
+                    </div>
+                    <div class="export-options">
+                        <button class="export-btn"><i class="fas fa-file-pdf"></i> Export PDF</button>
+                        <button class="export-btn"><i class="fas fa-file-csv"></i> Export CSV</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="report-section">
+                <h2><i class="fas fa-money-bill-wave"></i> Sales Summary</h2>
+                <div class="summary-cards">
+                    <div class="card">
+                        <h3><i class="fas fa-coins"></i> Total Sales</h3>
+                        <p id="total-sales"><i class="fas fa-spinner fa-spin"></i></p>
+                        <span class="tooltip" title="Total revenue from all orders">ℹ️</span>
+                    </div>
+                    <div class="card">
+                        <h3><i class="fas fa-calculator"></i> Avg. Order Value</h3>
+                        <p id="avg-order-value"><i class="fas fa-spinner fa-spin"></i></p>
+                        <span class="tooltip" title="Average value per order">ℹ️</span>
+                    </div>
+                    <div class="card">
+                        <h3><i class="fas fa-trophy"></i> Top Selling Item</h3>
+                        <p id="top-selling-item"><i class="fas fa-spinner fa-spin"></i></p>
+                        <span class="tooltip" title="Most frequently sold item">ℹ️</span>
+                    </div>
+                    <div class="card">
+                        <h3><i class="fas fa-shopping-cart"></i> Orders Processed</h3>
+                        <p id="orders-processed"><i class="fas fa-spinner fa-spin"></i></p>
+                        <span class="tooltip" title="Total number of orders">ℹ️</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="report-section">
+                <h2><i class="fas fa-box-open"></i> Inventory Summary</h2>
+                <div class="summary-cards">
+                    <div class="card">
+                        <h3><i class="fas fa-boxes"></i> Total Items in Stock</h3>
+                        <p id="total-items"><i class="fas fa-spinner fa-spin"></i></p>
+                        <span class="tooltip" title="Total items in inventory">ℹ️</span>
+                    </div>
+                    <div class="card">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Low Stock Items</h3>
+                        <p id="low-stock-items"><i class="fas fa-spinner fa-spin"></i></p>
+                        <span class="tooltip" title="Items needing restocking">ℹ️</span>
+                    </div>
+                    <div class="card">
+                        <h3><i class="fas fa-star"></i> Most Used Item</h3>
+                        <p id="most-used-item"><i class="fas fa-spinner fa-spin"></i></p>
+                        <span class="tooltip" title="Most frequently used item">ℹ️</span>
+                    </div>
+                    <div class="card">
+                        <h3><i class="fas fa-money-bill"></i> Stock Value</h3>
+                        <p id="stock-value"><i class="fas fa-spinner fa-spin"></i></p>
+                        <span class="tooltip" title="Total value of inventory">ℹ️</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../public/js/admin.js"></script>
+</body>
+</html>
