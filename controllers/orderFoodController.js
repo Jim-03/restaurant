@@ -21,8 +21,8 @@ orderFoodApi.get('/api/orderFood/:id', (req, res) => {
 /**
  * Adds a food item to a specific order
  */
-orderFoodApi.post('/api/orderFood/:id', (req, res) => {
-  service.addToOrder(Number(req.params.id), req.body)
+orderFoodApi.post('/api/orderFood', (req, res) => {
+  service.addToOrder(req.body)
     .then(response => {
       res.status(statusCode(response.status)).json(response);
     });
