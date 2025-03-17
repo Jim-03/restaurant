@@ -6,7 +6,6 @@ const repo = require('../repositories/orderFoodRepository');
 
 /**
  * Handles the logic for adding a food item to an order
- * @param {number} id The order's primary key
  * @param {Object} orderedFood The ordered food data
  * @returns {Promise<{
  *     status: "rejected" | "success" | "error",
