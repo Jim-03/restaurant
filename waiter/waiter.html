@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"
+        name="description"
+        content="find better software solutions for your restaurant and attract visiting clients to experience the thrill"
+        >
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Waiterhtmlpagepos</title>
+        <link rel="stylesheet" href="./waiter.css"/>
+    </head>
+    <body> 
+        <header>
+            <h1>Waiter Pos</h1>
+            <p>we serve you eat</p>
+        </header>
+        <input type="text" id="search-bar" placeholder="Search for meals..." />
+    <main>
+        <section>
+            <h2>Menu Items</h2>
+            <div id="filters">
+                <select id="categoryFilter">
+                    <option value="all">All Categories</option>
+                    <option value="appetizers">Appetizers</option>
+                    <option value="mainCourses">Main Courses</option>
+                    <option value="desserts">Desserts</option>
+                    <option value="beverages">Beverages</option>
+                </select>
+                <button id="addItemButton">Add New Item</button>
+            </div>
+            <ul id="menuItems">
+                <!-- Dynamically generated menu items will go here -->
+            </ul>
+        </section>
+        <section>
+            <h2>Preview</h2>
+            <div id="menuPreview">
+                <!-- Live preview of the menu will go here -->
+            </div>
+        </section>
+    </main>
+    <footer>
+        <button id="saveDraftButton">Save Draft</button>
+        <button id="publishButton">Publish Menu</button>
+    </footer>
+    <script src="./waiter.js"></script>
+       
+    </body>
+</html>
