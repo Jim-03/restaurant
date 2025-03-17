@@ -1,0 +1,186 @@
+h1{
+    text-align: center;
+    color: #ced0d1;
+    margin-bottom: 20px;
+}
+/* Header Styles */
+header {
+    background-color: #2c3e50; /* Dark blue */
+    color: #fff; /* White text */
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+header p {
+    margin: 10px 0 0;
+    font-size: 1.2rem;
+    color: #ecf0f1; /* Light gray for subtitle */
+}
+
+#search-bar {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px 15px;
+    margin: 20px auto;
+    display: block;
+    border: 2px solid #3498db;
+    border-radius: 25px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+  
+  #search-bar:focus {
+    border-color: #2980b9;
+  }
+  /* styles.css */
+
+/* General styling for the main section */
+main {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for each section within the main */
+main section {
+    margin-bottom: 30px;
+}
+
+/* Styling for section headings */
+main section h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+}
+
+/* Styling for the filters container */
+#filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* Styling for the category filter dropdown */
+#categoryFilter {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+/* Styling for the "Add New Item" button */
+#addItemButton {
+    padding: 8px 16px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #28a745;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#addItemButton:hover {
+    background-color: #218838;
+}
+
+/* Styling for the menu items list */
+#menuItems {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#menuItems li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease;
+}
+
+#menuItems li:hover {
+    background-color: #f1f1f1;
+}
+
+/* Styling for the remove button inside each menu item */
+#menuItems li button {
+    padding: 5px 10px;
+    font-size: 12px;
+    color: #fff;
+    background-color: #dc3545;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#menuItems li button:hover {
+    background-color: #c82333;
+}
+
+/* Styling for the preview section */
+#menuPreview {
+    padding: 15px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    min-height: 100px;
+}
+
+/* Styling for the footer */
+footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 20px;
+    background-color: #f1f1f1;
+    border-top: 1px solid #ddd;
+    border-radius: 0 0 8px 8px;
+}
+
+/* Styling for the footer buttons */
+footer button {
+    padding: 8px 16px;
+    font-size: 14px;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#saveDraftButton {
+    background-color: #007bff;
+}
+
+#saveDraftButton:hover {
+    background-color: #0056b3;
+}
+
+#publishButton {
+    background-color: #28a745;
+}
+
+#publishButton:hover {
+    background-color: #218838;
+}
