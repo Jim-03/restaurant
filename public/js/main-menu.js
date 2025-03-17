@@ -1,133 +1,75 @@
-// Tab Navigation
-const tabs = document.querySelectorAll('.tab-link');
-const tabContents = document.querySelectorAll('.tab-content');
+import { displayFood } from './util.js';
 
-function switchTab (targetTab) {
-  tabs.forEach(t => t.classList.remove('active'));
-  tabContents.forEach(content => content.classList.remove('active'));
+const display = document.getElementById('displaySection');
 
-  const tabElement = document.querySelector(`.tab-link[data-tab="${targetTab}"]`);
-  const contentElement = document.getElementById(targetTab);
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    loadCategories();
+    // Fetch the list of food items from the special
+    const backendResponse = await fetch('/api/food/category/1');
+    const data = await backendResponse.json();
 
-  tabElement.classList.add('active');
-  contentElement.classList.add('active');
-}
-
-tabs.forEach(tab => {
-  tab.addEventListener('click', (e) => {
-    e.preventDefault();
-    const targetTab = tab.getAttribute('data-tab');
-    switchTab(targetTab);
-  });
+    // Check if food list is empty and display
+    if (data.status !== 'success') {
+      display.innerHTML = `<p id="responses">${data.message}</p>`;
+      return;
+    }
+    // Display the food items
+    displayFood(data.list);
+  } catch (error) {
+    console.error(error);
+    alert('An error has occurred. Please try again!');
+  }
 });
 
-// Menu Search Functionality
-const searchInput = document.getElementById('menuSearch');
-const productGrid = document.getElementById('productGrid');
-const products = Array.from(document.querySelectorAll('.product'));
+/**
+ * Loads the categories from the database to the navigation bar
+ */
+async function loadCategories () {
+  // Get the navigation bar
+  const navBar = document.getElementById('categories');
 
-searchInput.addEventListener('input', function (e) {
-  const searchTerm = e.target.value.toLowerCase();
+  // Clear out the navBar
+  navBar.innerHTML = '';
 
-  const filteredProducts = products
-    .filter(product => {
-      const productName = product.getAttribute('data-name').toLowerCase();
-      return productName.includes(searchTerm);
-    })
-    .sort((a, b) => {
-      const nameA = a.getAttribute('data-name').toLowerCase();
-      const nameB = b.getAttribute('data-name').toLowerCase();
-      return nameA.localeCompare(nameB);
+  try {
+    // Fetch the list of categories
+    const categories = await fetch('/api/category');
+    const data = await categories.json();
+
+    // Check if categories exist
+    if (data.status !== 'success') {
+      alert(data.message);
+    }
+
+    // Iterate through each category and add it to the UI
+    data.list.forEach((category) => {
+      const button = document.createElement('button');
+      button.id = category.name;
+      button.textContent = category.name;
+      button.addEventListener('click', async () => {
+        // Clear out the display section
+        display.innerHTML = '';
+
+        // Fetch the list of items in this category
+        const response = await fetch(`/api/food/category/${category.id}`);
+        const foodData = await response.json();
+
+        // Check if the list was obtained successfully
+        if (foodData.status !== 'success') {
+          display.innerHTML = `<p id="responses">${foodData.message}</p>`;
+          return;
+        }
+
+        // Display the food items
+        displayFood(foodData.list);
+      });
+
+      // Append the button to the navigation bar
+      navBar.appendChild(button);
     });
-
-  productGrid.innerHTML = '';
-  filteredProducts.forEach(product => {
-    productGrid.appendChild(product.cloneNode(true));
-  });
-
-  addCartListeners();
-});
-
-// Add to Cart Functionality
-const cartItemsContainer = document.getElementById('cartItems');
-const totalPriceElement = document.getElementById('totalPrice');
-const cart = [];
-let totalPrice = 0;
-
-function addCartListeners () {
-  const addToCartButtons = document.querySelectorAll('.product button');
-  addToCartButtons.forEach(button => {
-    button.removeEventListener('click', handleAddToCart);
-    button.addEventListener('click', handleAddToCart);
-  });
-}
-
-function handleAddToCart () {
-  const productElement = this.parentElement;
-  const productName = productElement.getAttribute('data-name');
-  const productPrice = parseFloat(productElement.getAttribute('data-price'));
-
-  const existingItem = cart.find(item => item.name === productName);
-  if (existingItem) {
-    existingItem.quantity++;
-  } else {
-    cart.push({ name: productName, price: productPrice, quantity: 1 });
+  } catch (error) {
+    console.error(error);
+    alert('An error has occurred. Please try again!');
   }
-  totalPrice += productPrice;
-  updateCart();
 }
-
-addCartListeners();
-
-function updateCart () {
-  cartItemsContainer.innerHTML = '';
-  cart.forEach((item, index) => {
-    const cartItem = document.createElement('div');
-    cartItem.classList.add('cart-item');
-    cartItem.innerHTML = `
-      <span>${item.name} - KSH ${item.price.toFixed(2)}</span>
-      <div class="quantity">
-        <button onclick="changeQuantity(${index}, -1)">-</button>
-        <span>${item.quantity}</span>
-        <button onclick="changeQuantity(${index}, 1)">+</button>
-      </div>
-      <button class="remove-btn" onclick="removeFromCart(${index})">Remove</button>
-    `;
-    cartItemsContainer.appendChild(cartItem);
-  });
-
-  totalPriceElement.textContent = `Total: KSH ${totalPrice.toFixed(2)}`;
-}
-
-function changeQuantity (index, change) {
-  const item = cart[index];
-  item.quantity += change;
-  totalPrice += change * item.price;
-  if (item.quantity <= 0) {
-    cart.splice(index, 1);
-  }
-  updateCart();
-}
-
-function removeFromCart (index) {
-  totalPrice -= cart[index].price * cart[index].quantity;
-  cart.splice(index, 1);
-  updateCart();
-}
-
-// Placeholder Functions
-function updateDashboardStats () {
-  console.log('Stats updated');
-}
-
-function updateRecentActivities () {
-  console.log('Activities updated');
-}
-
-document.querySelector('.logout-btn').addEventListener('click', () => {
-  alert('Logged out!');
-});
-
-document.querySelector('.checkout-btn').addEventListener('click', () => {
-  alert('Proceeding to checkout!');
-});
