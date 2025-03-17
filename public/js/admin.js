@@ -1,5 +1,5 @@
 
-        // Date range preset handling
+        
         const datePreset = document.getElementById('datePreset');
         const customDate = document.querySelector('.custom-date');
         
@@ -12,19 +12,19 @@
                 document.getElementById('end-date').value = '';
             }
             showLoading();
-            // TODO: Fetch new data based on date range
+            
         });
 
-        // Export button handlers (placeholder)
+        
         document.querySelectorAll('.export-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 const format = this.textContent.includes('PDF') ? 'PDF' : 'CSV';
                 alert(`Exporting to ${format}...`);
-                // TODO: Implement actual export functionality
+                
             });
         });
 
-        // Show loading state
+        
         function showLoading() {
             const metrics = [
                 'total-sales', 'avg-order-value', 'top-selling-item', 'orders-processed',
