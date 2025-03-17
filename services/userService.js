@@ -184,7 +184,7 @@ async function authenticate (user) {
     }
 
     // Validate the user's password
-    if (!bcrypt.compare(user.password, userData.password)) {
+    if (!await bcrypt.compare(user.password, userData.password)) {
       return {
         status: 'rejected',
         message: 'Incorrect password!',
