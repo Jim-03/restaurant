@@ -21,7 +21,7 @@ header h1 {
   text-align: center;
 }
 
-.categories {
+#categories {
   position: sticky;
   top: 0;
   display: flex;
@@ -33,7 +33,7 @@ header h1 {
   background-color: white;
 }
 
-.categories button {
+#categories button {
   background-color: rgb(52, 152, 219);
   cursor: pointer;
   color: white;
@@ -49,28 +49,7 @@ header h1 {
   gap: 5px;
 }
 
-.categories button .fa-solid {
-  font-size: 20px;
-}
-.fa-plate-wheat {
-  color: gold;
-}
-.fa-mug-hot {
-  color: orange;
-}
-.fa-drumstick-bite {
-  color: rgb(211, 47, 47);
-}
-.fa-money-bill {
-  color: rgb(46, 139, 87);
-}
-.fa-ice-cream {
-  color: rgb(186, 104, 200);
-}
-.fa-hand-holding {
-  color: rgb(0, 206, 209);
-}
-.categories button:hover {
+#categories button:hover {
   background-color: lightblue;
   color: black;
   transform: translateY(-2px);
