@@ -1,0 +1,12 @@
+#notification {
+    position: absolute;
+    top: 5px;
+    display: none;
+    background-color: white;
+    min-width: 30%;
+    min-height: 5vh;
+    text-align: center;
+    align-content: center;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+}
