@@ -41,7 +41,6 @@ export function displayFood (foodList) {
 
   // Iterate through each item and add to the display section
   foodList.forEach((foodItem) => {
-  
     // Create the food section
     const foodSection = document.createElement('section');
     foodSection.setAttribute('class', 'foodItem');
