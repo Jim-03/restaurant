@@ -16,7 +16,7 @@ module.exports = sequelize.define(
     },
     payment: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       references: {
         model: 'payments',
         key: 'id'
