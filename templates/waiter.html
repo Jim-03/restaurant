@@ -7,7 +7,7 @@
         >
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Waiterhtmlpagepos</title>
-        <link rel="stylesheet" href="./waiter.css"/>
+        <link rel="stylesheet" href="../public/css/waiter.css"/>
     </head>
     <body> 
         <header>
@@ -38,12 +38,27 @@
                 <!-- Live preview of the menu will go here -->
             </div>
         </section>
+        <section id="foodForm">
+            <form action="">
+                <div>
+                    <p id="closeButton">&times;</p>
+                </div>
+                <input type="text" id="foodName" placeholder="The name of the food">
+                <select id="foodCategory">
+                    <option value="special">Special</option>
+                </select>
+                <input type="text" placeholder="Price in digits only">
+                <input type="number" placeholder="The number of food items" min="1">
+                <button id="addButton">Add</button>
+                <button id="clearButton">Clear</button>
+            </form>
+        </section>
     </main>
     <footer>
         <button id="saveDraftButton">Save Draft</button>
         <button id="publishButton">Publish Menu</button>
     </footer>
-    <script src="./waiter.js"></script>
+    <script src="../public/js/waiter.js"></script>
        
     </body>
 </html>

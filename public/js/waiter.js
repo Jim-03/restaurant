@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const menuPreview = document.getElementById('menuPreview');
     const saveDraftButton = document.getElementById('saveDraftButton');
     const publishButton = document.getElementById('publishButton');
+    const closeButton = document.getElementById("closeButton")
+    const foodForm = document.getElementById("foodForm")
 
     // Function to render menu items based on current filters and search term
     function renderMenuItems() {
@@ -45,26 +47,6 @@ document.addEventListener('DOMContentLoaded', function () {
         updatePreview();
     }
 
-    // Function to add a new item to the menu
-    function addItem() {
-        const itemName = prompt('Enter the name of the new item:');
-        if (itemName) {
-            const itemCategory = prompt('Enter the category of the new item (appetizers, mainCourses, desserts, beverages):');
-            const itemPrice = parseFloat(prompt('Enter the price of the new item:'));
-            if (itemCategory && !isNaN(itemPrice)) {
-                const newItem = {
-                    id: menuItems.length + 1,
-                    name: itemName,
-                    category: itemCategory,
-                    price: itemPrice,
-                };
-                menuItems.push(newItem);
-                renderMenuItems();
-            } else {
-                alert('Invalid input. Please try again.');
-            }
-        }
-    }
 
     // Function to remove an item from the menu
     function removeItem(itemId) {
@@ -103,7 +85,18 @@ document.addEventListener('DOMContentLoaded', function () {
     addItemButton.addEventListener('click', addItem);
     saveDraftButton.addEventListener('click', saveDraft);
     publishButton.addEventListener('click', publishMenu);
+    closeButton.addEventListener('click', hideFoodForm)
+    foodForm.addEventListener('click', hideFoodForm)
 
     // Initial render of menu items
     renderMenuItems();
 });
+
+function addItem() {
+    // Display the new item form
+    document.getElementById("foodForm").style.display = 'flex'
+}
+
+function hideFoodForm() {
+    document.getElementById('foodForm').style.display = 'none'
+}

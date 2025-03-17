@@ -1,3 +1,9 @@
+body {
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+
 h1{
     text-align: center;
     color: #ced0d1;
@@ -147,6 +153,68 @@ main section h2 {
     min-height: 100px;
 }
 
+/* The food form */
+#foodForm {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: none;
+    justify-content: center;
+}
+
+#foodForm form {
+    margin-top: 150px;
+    background-color: white;
+    border-radius: 5px;
+    width: 30%;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#foodForm div {
+    height: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    width: 100%;
+}
+#closeButton {
+    font-size: 30px;
+    transform: translateY(-40px);
+    translate: 5px;
+    background-color: white;
+    cursor: pointer;
+}
+#foodForm form input, #foodForm form select {
+    height: 50px;
+    width: 80%;
+    margin: 20px auto;
+    border-radius: 10px;
+    border: 1px solid black;
+    padding-left: 10px;
+}
+
+#foodForm form button {
+    height: 40px;
+    width: 50%;
+    border-radius: 10px;
+    border: none;
+    margin: 10px auto;
+    cursor: pointer;
+}
+
+#addButton {
+    background-color: rgb(40, 167, 69);
+}
+
+#clearButton {
+    background-color: red;
+}
 /* Styling for the footer */
 footer {
     display: flex;
