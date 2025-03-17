@@ -2,7 +2,7 @@
  * @module categoryService
  * @description The business logic for the category model
  */
-import { findAll, findByName, save, findById, update, remove } from '../repositories/categoryRepository';
+const repo = require('../repositories/categoryRepository');
 
 /**
  * Handles the logic for adding a new category record
@@ -22,7 +22,7 @@ async function addCategory (category) {
 
   try {
     // Check if another category exists
-    if (await findByName(category.name)) {
+    if (await repo.findByName(category.name)) {
       return {
         status: 'duplicate',
         message: 'Category already exists!'
@@ -30,7 +30,7 @@ async function addCategory (category) {
     }
 
     // Add the new category
-    await save(category);
+    await repo.save(category);
     return {
       status: 'created',
       message: 'Category successfully added'
@@ -55,7 +55,7 @@ async function addCategory (category) {
 async function getAll () {
   try {
     // Fetch a list of all categories
-    const categoryList = await findAll();
+    const categoryList = await repo.findAll();
 
     // Check if categories exist
     if (!categoryList || categoryList.length === 0) {
@@ -107,7 +107,7 @@ async function updateCategory (id, newData) {
 
   try {
     // Fetch the old data
-    const oldData = await findById(id);
+    const oldData = await repo.findById(id);
 
     // Check if old data exists
     if (!oldData) {
@@ -118,7 +118,7 @@ async function updateCategory (id, newData) {
     }
 
     // Update the data
-    await update(oldData, newData);
+    await repo.update(oldData, newData);
     return {
       status: 'success',
       message: 'Category successfully updated'
@@ -150,7 +150,7 @@ async function deleteCategory (id) {
 
   try {
     // Fetch the category's data
-    const category = await findById(id);
+    const category = await repo.findById(id);
 
     // Check if category exists
     if (!category) {
@@ -161,7 +161,7 @@ async function deleteCategory (id) {
     }
 
     // Delete the category
-    await remove(category);
+    await repo.remove(category);
     return {
       status: 'success',
       message: 'Category successfully removed'
