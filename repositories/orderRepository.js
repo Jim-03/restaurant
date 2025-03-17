@@ -72,12 +72,12 @@ async function findByDateRange (start, end) {
 /**
  * Adds a new order to the database
  * @param {Object} order The order's data
- * @returns {Promise<void>} A promise that resolves when the order is added
+ * @returns {Promise<orderModel>} The newly created database record
  * @throws {Error} In case of any errors
  */
 async function save (order) {
   try {
-    await orderModel.create(order);
+    return await orderModel.create(order);
   } catch (e) {
     throw new Error(`An error has occurred while creating the order: ${e.message}`);
   }
