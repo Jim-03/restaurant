@@ -193,7 +193,7 @@ async function authenticate (user) {
     }
 
     // Remove the password
-    userData.password = null;
+    userData.password = undefined;
 
     return {
       status: 'success',
