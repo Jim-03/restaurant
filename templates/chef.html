@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chef</title>
+    <link rel="shortcut icon" href="images/chef.png" type="image/x-icon" />
+    <link rel="stylesheet" href="css/chef.css" />
+    <link rel="stylesheet" href="css/notification.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <header>
+      <h1>Chef</h1>
+    </header>
+    <p id="notification"></p>
+    <main>
+      <h2 class="section-header">Manage Food Items</h2>
+      <section class="chef-operations" id="foodSection">
+        <section class="crud" id="addFood">
+          <i class="fa-solid fa-utensils"></i>
+          <p>Add Food Item</p>
+        </section>
+        <section id="foodForm" class="background">
+          <form id="addFoodForm">
+            <div class="closingDiv">
+              <p class="closeButton">&times;</p>
+            </div>
+            <input
+              type="text"
+              id="newFoodName"
+              placeholder="The name of the food"
+            />
+            <select id="newFoodCategory"></select>
+            <input
+              type="number"
+              placeholder="Price in digits only"
+              min="1.00"
+              id="newFoodPrice"
+            />
+            <input
+              type="number"
+              placeholder="The number of food items"
+              id="newFoodQuantity"
+              min="1"
+            />
+            <button id="addFoodButton">Add</button>
+            <button class="clearButton">Clear</button>
+          </form>
+        </section>
+        <section class="crud" id="updateFood">
+          <i class="fa-solid fa-pen-to-square"></i>
+          <p>Update A food Item</p>
+        </section>
+        <section class="background" id="updateForm">
+          <form id="updateFoodForm">
+            <div class="closingDiv">
+              <p class="closeButton">&times;</p>
+            </div>
+            <div class="searchDiv">
+              <input
+                type="text"
+                placeholder="Search a food item"
+                id="searchFoodUpdate"
+              />
+              <i
+                class="fa-solid fa-magnifying-glass"
+                id="searchUpdateButton"
+              ></i>
+            </div>
+            <label for="updateProductNumber">Product number</label>
+            <input
+              id="updateProductNumber"
+              type="text"
+              placeholder="Product Number"
+              readonly
+              style="text-align: center"
+            />
+            <label for="updatedFoodName">Food Name:</label>
+            <input type="text" id="updatedFoodName" placeholder="New Name" />
+            <label for="updatedFoodPrice">Food Price:</label>
+            <input
+              type="number"
+              id="updatedFoodPrice"
+              placeholder="New Price"
+            />
+            <select id="updatedFoodCategory"></select>
+            <label for="updatedFoodStock">Food Stock</label>
+            <input
+              type="number"
+              id="updatedFoodStock"
+              placeholder="The new number of food items"
+            />
+            <button id="updateFoodButton">Update</button>
+            <button class="clearButton">Clear</button>
+          </form>
+        </section>
+        <section class="crud" id="deleteFood">
+          <i class="fa-solid fa-trash"></i>
+          <p>Delete A food Item</p>
+        </section>
+        <section class="background" id="deleteFoodBackground">
+          <form id="deleteFoodForm">
+            <div class="closingDiv">
+              <p class="closeButton">&times;</p>
+            </div>
+            <div class="searchDiv">
+              <input type="text" placeholder="Search a food item" id="searchDeleteFood"/>
+              <i
+                class="fa-solid fa-magnifying-glass"
+                id="searchDeleteButton"
+              ></i>
+            </div>
+            <div id="deleteFoodData">
+              <p>Search food Item</p>
+            </div>
+          </form>
+        </section>
+      </section>
+      <h2 class="section-header">Manage Categories</h2>
+      <section class="chef-operations" id="categorySection">
+        <section class="crud">
+          <i class="fa-solid fa-tag"></i>
+          <p>Add new category</p>
+        </section>
+        <section class="crud">
+          <i class="fa-solid fa-list"></i>
+          <p>Update A Category</p>
+        </section>
+        <section class="crud">
+          <i class="fa-solid fa-trash"></i>
+          <p>Delete A Category</p>
+        </section>
+      </section>
+    </main>
+    <footer>
+      <h2>QuickServe POS &copy; 2025</h2>
+    </footer>
+    <script type="module" src="js/chef.js"></script>
+  </body>
+</html>

@@ -1,0 +1,167 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+  transition: 100ms;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  overflow-x: hidden;
+  background-color: rgb(245, 245, 245);
+}
+
+header,
+footer {
+  background-color: rgb(44, 62, 80);
+  height: auto;
+  color: white;
+  text-align: center;
+}
+
+header h1 {
+  padding: 20px;
+}
+
+main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.section-header {
+  font-size: 30px;
+  margin: 50px;
+  color: rgb(44, 62, 80);
+}
+
+.chef-operations {
+  display: flex;
+  gap: 30px;
+}
+
+.crud {
+  width: 400px;
+  height: 100px;
+  background-color: white;
+  box-shadow: 5px 5px 5px rgb(44, 62, 80);
+  border-radius: 10px;
+  align-content: center;
+  text-align: center;
+  cursor: pointer;
+  gap: 10px;
+}
+
+.crud:hover {
+  transform: translateY(-5px);
+}
+.crud i {
+  font-size: 30px;
+  color: blue;
+  margin-bottom: 10px;
+}
+
+.crud p {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.background form {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  width: 350px;
+  text-align: center;
+  position: relative;
+}
+
+.background .closingDiv {
+  text-align: right;
+}
+.closeButton {
+  font-size: 22px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #e74c3c;
+}
+.background form input,
+.background form select {
+  width: 90%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid rgb(204, 204, 204);
+  font-size: 16px;
+}
+
+.background form input:focus,
+.background form select:focus {
+  border-color: rgb(52, 152, 219);
+  outline: none;
+  box-shadow: 0px 0px 5px rgba(52, 152, 219, 0.5);
+}
+
+.background form button {
+  width: 95%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+#addFoodButton,
+#updateFoodButton {
+  background: rgb(46, 204, 113);
+  color: white;
+}
+#addFoodButton:hover {
+  background: rgb(39, 174, 96);
+}
+.clearButton, .deleteButton {
+  background: rgb(231, 76, 60);
+  color: white;
+  margin-top: 10px;
+}
+.clearButton:hover, .deleteButton:hover {
+  background: rgb(192, 57, 43);
+}
+.searchDiv {
+  display: flex;
+  align-items: center;
+  width: 90%;
+  margin: auto;
+}
+
+.searchDiv input {
+  flex-grow: 1;
+}
+
+.fa-magnifying-glass {
+  width: 10%;
+  text-align: center;
+  align-content: center;
+  cursor: pointer;
+  height: 50px;
+}
+
+footer h2 {
+  padding: 10px;
+}
