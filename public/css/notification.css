@@ -1,6 +1,7 @@
 #notification {
     position: absolute;
     top: 5px;
+    left: 500px;
     display: none;
     background-color: white;
     min-width: 30%;
