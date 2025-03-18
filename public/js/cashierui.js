@@ -1,4 +1,3 @@
-//to begin,its the first version i had to improvise juu ya time sa the left side/container ni orders atakua ameclick from the right zinaappear kwa left container then you select mode of payment and cashier then send to waiter page.
 document.addEventListener('DOMContentLoaded', function () {
     const orderDetails = document.getElementById('order-details');
     const paymentMethod = document.getElementById('payment-method');
@@ -6,10 +5,16 @@ document.addEventListener('DOMContentLoaded', function () {
     const sendToWaiterButton = document.getElementById('send-to-waiter');
     const incomingOrders = document.getElementById('incoming-orders');
 
+    // here are the recently added payment calculation elements
+    const totalAmountInput = document.getElementById('totalAmount');
+    const amountPaidInput = document.getElementById('amountPaid');
+    const balanceInput = document.getElementById('balance');
+    const calculateBalanceButton = document.getElementById('calculateBalance');
+
     // Fetch orders from the backend
     async function fetchOrders() {
         try {
-            const response = await fetch('/api/get-orders'); // jimmy you will update with the correct API endpoint
+            const response = await fetch('/api/get-orders'); // Update with actual API endpoint
             const orders = await response.json();
             displayOrders(orders);
         } catch (error) {
@@ -35,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Display order details
+    // Display order details and set total amount
     function displayOrderDetails(order) {
         let orderHTML = `<h2>Order ID: ${order.id}</h2>`;
         orderHTML += '<ul>';
@@ -45,7 +50,25 @@ document.addEventListener('DOMContentLoaded', function () {
         orderHTML += '</ul>';
         orderHTML += `<p>Total: KSH ${order.total.toFixed(2)}</p>`;
         orderDetails.innerHTML = orderHTML;
+
+        // Set the total amount dynamically
+        totalAmountInput.value = order.total.toFixed(2);
     }
+
+    // function to calculate balance when button is clicked
+    calculateBalanceButton.addEventListener('click', function () {
+        const totalAmount = parseFloat(totalAmountInput.value) || 0;
+        const amountPaid = parseFloat(amountPaidInput.value) || 0;
+
+        if (amountPaid < totalAmount) {
+            alert('Insufficient payment! Please enter a valid amount.');
+            balanceInput.value = ''; // Clear balance field after the alert
+            return;
+        }
+
+        const balance = amountPaid - totalAmount;
+        balanceInput.value = balance.toFixed(2); // Display with 2 decimal places which inludes the cents
+    });
 
     // Send order to waiter
     sendToWaiterButton.addEventListener('click', async function () {
@@ -73,7 +96,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (response.ok) {
                 alert('Order sent to waiter successfully!');
-                
             } else {
                 alert('Failed to update order status.');
             }

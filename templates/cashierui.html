@@ -14,6 +14,22 @@
             <div class="container">
                 <h1>CASHIER</h1>
                 <div id="order-details"></div>
+
+                <!-- in this section the cashier enters the amount paid and the total to get balance-->
+                <section>
+                    <h2>Payment amount</h2>
+                    <label for="totalAmount">Total Amount:</label>
+                    <input type="number" id="totalAmount" placeholder="Enter total amount" readonly>
+                
+                    <label for="amountPaid">Amount Paid:</label>
+                    <input type="number" id="amountPaid" placeholder="Enter amount paid">
+                
+                    <label for="balance">Balance (Change Due):</label>
+                    <input type="number" id="balance" readonly>
+                
+                    <button id="calculateBalance">Calculate Balance</button>
+                </section>
+                
                 <div>
                     <label for="payment-method">Payment Method:</label>
                     <select id="payment-method">
