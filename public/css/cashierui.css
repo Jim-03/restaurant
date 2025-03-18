@@ -1,0 +1,141 @@
+/* General Styles */
+/*i added some comments on new styles here.Then the colors are subject to change if any of you want to*/
+body {
+    font-family: Arial, sans-serif; 
+    margin: 0; 
+    padding: 0; 
+    background-color: #f4f4f4; 
+    color: #333; 
+}
+
+.split-container {
+    display: flex; 
+    height: 100vh; 
+}
+
+.left-side, .right-side {
+    flex: 1; /*each side takes an equal amount off space*/
+    padding: 20px; 
+    box-sizing: border-box; /* Ensures padding is included in the element's total width/height */
+}
+
+.left-side {
+    background-color: #fff; 
+    border-right: 1px solid #ddd; 
+}
+
+.right-side {
+    background-color: #f9f9f9; 
+}
+
+.container {
+    max-width: 100%; /* Ensures the container doesn't exceed the width of its parent */
+    margin: 0; /* Removes default margin */
+    padding: 20px; 
+    background-color: #fff; 
+    border-radius: 8px; /* Rounds the corners of the container */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+}
+
+h1 {
+    text-align: center; 
+    color: #2c3e50; 
+    margin-bottom: 20px; /* Adds space below the heading */
+}
+
+h2 {
+    color: #34495e; 
+    margin-bottom: 15px; /* Adds space below the subheading */
+}
+
+/* Order Details Section */
+#order-details, #chef-order-details, #incoming-orders {
+    background-color: #ecf0f1; 
+    padding: 15px; 
+    border-radius: 8px; /* Rounds the corners of the order sections */
+    margin-bottom: 20px; /* Adds space below the order sections */
+}
+
+#order-details ul, #chef-order-details ul, #incoming-orders ul {
+    list-style: none; /* Removes bullet points from lists */
+    padding: 0; /* Removes default padding */
+}
+
+#order-details li, #chef-order-details li, #incoming-orders li {
+    background-color: #fff; 
+    padding: 10px; 
+    margin-bottom: 10px; /* Adds space between list items */
+    border-radius: 5px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    cursor: pointer; /* Changes the cursor to a pointer when moving  over list items in the containers, both left and right */
+}
+
+#incoming-orders li:hover {
+    background-color: #f1f1f1; 
+}
+
+/* Form Elements */
+label {
+    display: block; /* Makes labels block-level elements */
+    margin-bottom: 5px; /* Adds space below labels */
+    font-weight: bold; /* Makes labels bold */
+    color: #34495e; 
+}
+
+select, input[type="number"] {
+    width: 100%; /* Makes form elements take up the full width of their container */
+    padding: 10px; 
+    margin-bottom: 15px; 
+    border: 1px solid #bdc3c7; /* Adds a border to form elements */
+    border-radius: 5px; 
+    font-size: 16px; 
+    background-color: #fff; 
+    color: #333; 
+}
+
+select:focus, input[type="number"]:focus {
+    border-color: #3498db; /* Changes the border color when form elements are focused */
+    outline: none; /* Removes the default outline */
+}
+
+/* Buttons */
+button {
+    display: block; 
+    width: 100%; 
+    padding: 10px; 
+    background-color: #3498db; 
+    color: #fff; 
+    border: none; 
+    border-radius: 5px; 
+    font-size: 16px; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease; 
+}
+button:hover {
+    background-color: #2980b9;
+}
+
+#send-to-waiter {
+    background-color: #050861; 
+}
+
+#send-to-waiter:hover {
+    background-color: #1a1182; 
+}
+
+/* this style gives the page a responsive design */
+@media (max-width: 768px) {
+    .split-container {
+        flex-direction: column; /* Stacks the left and right sides vertically on smaller screens */
+    }
+
+    .left-side, .right-side {
+        flex: none; /* Prevents the sides from flexing */
+        width: 100%; /* Makes each side take up the full width of the screen */
+    }
+
+    .left-side {
+        border-right: none; /* Removes the right border on smaller screens */
+        border-bottom: 1px solid #ddd; /* Adds a border to the bottom of the left side */
+    }
+}

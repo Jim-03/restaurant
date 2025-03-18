@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+    <link rel="stylesheet" href="cashierui.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    
+</head>
+<body>
+    <div class="split-container">
+        <!-- Left Side: Existing Admin/Cashier Interface -->
+        <div class="left-side">
+            <div class="container">
+                <h1>CASHIER</h1>
+                <div id="order-details"></div>
+                <div>
+                    <label for="payment-method">Payment Method:</label>
+                    <select id="payment-method">
+                        <option value="Cash">Cash</option>
+                        <option value="Card">Card</option>
+                        <option value="M-Pesa">M-Pesa</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="waiter">Assign Waiter:</label>
+                    <select id="waiter">
+                        <option value="waiter 1">clay</option>
+                        <option value="Waiter 2">jimmy</option>
+                        <option value="Waiter 3">vic</option>
+                    </select>
+                </div>
+                <button id="send-to-waiter">Send to Waiter</button>
+            </div>
+        </div>
+
+        <!-- Right Side: Incoming Orders -->
+        <div class="right-side">
+            <h2>Incoming Orders</h2>
+            <div id="incoming-orders">
+                <!-- Orders will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+    <script src="cashierui.js"></script>
+</body>
+</html>
