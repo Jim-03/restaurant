@@ -9,4 +9,5 @@
     align-content: center;
     border-radius: 5px;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
 }
