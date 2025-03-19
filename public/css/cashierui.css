@@ -1,145 +1,164 @@
 /* General Styles */
-/*i added some comments on new styles here.Then the colors are subject to change if any of you want to*/
+/* i added some comments on new styles here.Then the colors are subject to change if any of you want to */
 body {
-    font-family: Arial, sans-serif; 
-    margin: 0; 
-    padding: 0; 
-    background-color: #f4f4f4; 
-    color: #333; 
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    box-sizing: border-box; /* Ensures padding does not affect width */
 }
 
+/* Main layout container */
 .split-container {
-    display: flex; 
-    height: 100vh; 
+    display: flex;
+    height: 100vh;
+    width: 100%; /* Ensures it does not exceed the viewport width */
+    overflow: hidden; /* Prevents content from spilling outside */
 }
 
+/* Left and Right Side */
 .left-side, .right-side {
-    flex: 1; /*each side takes an equal amount off space*/
-    padding: 20px; 
-    box-sizing: border-box; /* Ensures padding is included in the element's total width/height */
+    flex: 1; /* Makes both sides take equal space */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    overflow-y: auto; /* Allows scrolling if content overflows */
+    box-sizing: border-box; /* Prevents content from overflowing */
+    padding: 20px; /* Ensures spacing */
 }
 
+/* Left Side */
 .left-side {
-    background-color: #fff; 
-    border-right: 1px solid #ddd; 
+    background-color: #fff;
+    border-right: 1px solid #ddd;
+    max-width: 50%; /* Prevents it from taking too much space */
 }
 
+/* Right Side */
 .right-side {
-    background-color: #f9f9f9; 
+    background-color: #f9f9f9;
+    max-width: 50%; /* Prevents overflow */
 }
 
+/* Container inside the left-side */
 .container {
-    max-width: 100%; /* Ensures the container doesn't exceed the width of its parent */
-    margin: 0; /* Removes default margin */
-    padding: 20px; 
-    background-color: #fff; 
-    border-radius: 8px; /* Rounds the corners of the container */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+    width: 100%;
+    flex-grow: 1; /* Makes it take available space */
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
 }
 
+/* Headings */
 h1 {
-    text-align: center; 
-    color: #2c3e50; 
-    margin-bottom: 20px; /* Adds space below the heading */
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 20px;
 }
 
 h2 {
-    color: #34495e; 
-    margin-bottom: 15px; /* Adds space below the subheading */
+    color: #34495e;
+    margin-bottom: 15px;
 }
 
 /* Order Details Section */
-#order-details, #chef-order-details, #incoming-orders {
-    background-color: #ecf0f1; 
-    padding: 15px; 
-    border-radius: 8px; /* Rounds the corners of the order sections */
-    margin-bottom: 20px; /* Adds space below the order sections */
+#order-details, #incoming-orders {
+    background-color: #ecf0f1;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
 }
 
-#order-details ul, #chef-order-details ul, #incoming-orders ul {
-    list-style: none; /* Removes bullet points from lists */
-    padding: 0; /* Removes default padding */
+#order-details ul,#incoming-orders ul {
+    list-style: none;
+    padding: 0;
 }
 
-#order-details li, #chef-order-details li, #incoming-orders li {
-    background-color: #fff; 
-    padding: 10px; 
-    margin-bottom: 10px; /* Adds space between list items */
-    border-radius: 5px; 
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-    cursor: pointer; /* Changes the cursor to a pointer when moving  over list items in the containers, both left and right */
+#order-details li,#incoming-orders li {
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
 }
 
 #incoming-orders li:hover {
-    background-color: #f1f1f1; 
+    background-color: #f1f1f1;
 }
 
 /* Form Elements */
 label {
-    display: block; /* Makes labels block-level elements */
-    margin-bottom: 5px; /* Adds space below labels */
-    font-weight: bold; /* Makes labels bold */
-    color: #34495e; 
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #34495e;
 }
 
 select, input[type="number"] {
-    width: 100%; /* Makes form elements take up the full width of their container */
-    padding: 10px; 
-    margin-bottom: 15px; 
-    border: 1px solid #bdc3c7; /* Adds a border to form elements */
-    border-radius: 5px; 
-    font-size: 16px; 
-    background-color: #fff; 
-    color: #333; 
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #fff;
+    color: #333;
+    box-sizing: border-box;
 }
 
 select:focus, input[type="number"]:focus {
-    border-color: #3498db; /* Changes the border color when form elements are focused */
-    outline: none; /* Removes the default outline */
+    border-color: #3498db;
+    outline: none;
 }
 
 /* Buttons */
 button {
-    display: block; 
-    width: 100%; 
-    padding: 10px; 
-    background-color: #3498db; 
-    color: #fff; 
-    border: none; 
-    border-radius: 5px; 
-    font-size: 16px; 
-    cursor: pointer; 
-    transition: background-color 0.3s ease; 
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #34a0bbec;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
+
 button:hover {
     background-color: #2980b9;
 }
 
 #send-to-waiter {
-    background-color: #050861; 
+    background-color: #050861;
 }
 
 #send-to-waiter:hover {
-    background-color: #1a1182; 
+    background-color: #1a1182;
 }
 
-/* this style gives the page a responsive design */
+/* Responsive Design for Smaller Screens */
 @media (max-width: 768px) {
     .split-container {
-        flex-direction: column; /* Stacks the left and right sides vertically on smaller screens */
+        flex-direction: column; /* Stacks left and right sides vertically */
+        height: auto;
     }
 
     .left-side, .right-side {
-        flex: none; /* Prevents the sides from flexing */
-        width: 100%; /* Makes each side take up the full width of the screen */
+        max-width: 100%; /* Makes each side take full width */
+        flex: none; /* Prevents flex behavior */
     }
 
     .left-side {
-        border-right: none; /* Removes the right border on smaller screens */
-        border-bottom: 1px solid #ddd; /* Adds a border to the bottom of the left side */
+        border-right: none;
+        border-bottom: 1px solid #ddd;
     }
 }
 
+/* Section Styling */
 section {
     padding: 15px;
     background-color: #fff;
@@ -161,13 +180,14 @@ input {
     border-radius: 4px;
     font-size: 16px;
 }
-/*this is the styles for the recently added calculate total and balance section*/
+
+/* Styles for the Calculate Total & Balance Section */
 button {
     margin-top: 10px;
     padding: 10px;
     width: 100%;
     font-size: 16px;
-    background-color: #007bff;
+    background-color: #ec2a23;
     color: white;
     border: none;
     border-radius: 4px;
