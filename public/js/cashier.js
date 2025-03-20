@@ -1,11 +1,14 @@
 import { notify } from "./util.js";
 
 document.addEventListener('DOMContentLoaded', function () {
-    const orderDetails = document.getElementById('order-details');
-    const paymentMethod = document.getElementById('payment-method');
-    const waiter = document.getElementById('waiter');
-    const sendToWaiterButton = document.getElementById('send-to-waiter');
-    const incomingOrders = document.getElementById('incoming-orders');
+  newPaymentMethod();
+  getPaymentMethods();
+  getWaiterList();
+  const orderDetails = document.getElementById('order-details');
+  const paymentMethod = document.getElementById('payment-method');
+  const waiter = document.getElementById('waiter');
+  const sendToWaiterButton = document.getElementById('send-to-waiter');
+  const incomingOrders = document.getElementById('incoming-orders');
 
     // here are the recently added payment calculation elements
     const totalAmountInput = document.getElementById('totalAmount');
@@ -143,3 +146,111 @@ document.addEventListener('DOMContentLoaded', function () {
     // Load orders on page load
     fetchOrders();
 });
+
+/**
+ * Sends a GET request to retrieve a list of payment methods
+ * It then updates the dropdown options for payment method
+ * @returns {Promise<void>} A promise that resolves when the UI is updated
+ */
+async function getPaymentMethods () {
+  try {
+    // Fetch the list of payment methods
+    const response = await fetch('/api/paymentMethod');
+    const data = await response.json();
+
+    // Check if payment methods exists
+    if (data.status !== 'success') return;
+
+    const paymentMethod = document.getElementById('payment-method');
+
+    // Populate the payment method UI
+    data.list.forEach(method => {
+      const option = document.createElement('option');
+      option.value = method.id;
+      option.textContent = method.name;
+      paymentMethod.appendChild(option);
+    });
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+/**
+ * Adds a new option in the payment methods dropdown
+ * On clicking the option, it allows one to add a new payment method
+ */
+function newPaymentMethod () {
+  const paymentMethod = document.getElementById('payment-method');
+  const method = document.createElement('option');
+  method.textContent = 'New Method';
+  paymentMethod.appendChild(method);
+  method.addEventListener('click', async () => {
+    // Ask for the new method
+    const name = prompt("Enter the new payment method's name?");
+    const description = prompt('Describe the new payment method');
+
+    try {
+      // Send the method to the backend for storage
+      const response = await fetch('/api/paymentMethod', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name, description })
+      });
+      const data = await response.json();
+
+      // Notify if method was added successfully
+      notify(data.status, data.message);
+
+      // Reload the page if successful
+      if (data.status === 'created') window.location.reload();
+    } catch (error) {
+      console.error(error);
+    }
+  });
+}
+
+/**
+ * Sends a GET request to the backend to retrieve a list of waiters
+ * It then updates the dropdown with the waiters' details
+ * @returns {Promise<void>} A promise that resolves when the UI is updated
+ */
+async function getWaiterList () {
+  try {
+    // Send a GET request to the backend
+    const response = await fetch('/api/user');
+    const data = await response.json();
+
+    // Check if any user exists
+    if (data.status !== 'success') {
+      alert('No waiters exist at the moment.\nPlease wait for the admin to add them first!');
+      return;
+    }
+
+    // Extract users who are servers
+    const servers = data.list.filter(user => user.role === 'server');
+
+    // Get the waiter select dropdown
+    const waiter = document.getElementById('waiter');
+
+    // Clear previous options
+    waiter.innerHTML = '';
+
+    // Add default option
+    const defaultOption = document.createElement('option');
+    defaultOption.textContent = 'Select a waiter';
+    defaultOption.value = '';
+    waiter.appendChild(defaultOption);
+
+    // Append servers to dropdown
+    servers.forEach(server => {
+      const option = document.createElement('option');
+      option.value = server.id;
+      option.textContent = server.fullName;
+      waiter.appendChild(option);
+    });
+  } catch (error) {
+    console.error(error);
+  }
+}
