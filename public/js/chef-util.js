@@ -237,3 +237,149 @@ export async function deleteFood (id) {
     console.error(error);
   }
 }
+
+/**
+ * Retrieves details from the category UI and sends to the backend to add it to the database
+ * @returns {undefined} Stops the code from complete execution
+ */
+export async function addCategory () {
+  const name = document.getElementById('newCategoryName').value.trim();
+  const description = document.getElementById('newCategoryDescription').value.trim();
+
+  // Check if the name is provided
+  if (!name) {
+    notify('rejected', "Provide the category's name!");
+    return;
+  }
+
+  try {
+    // Send the data to the backend for storage
+    const response = await fetch('/api/category', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ name, description })
+    });
+
+    const data = await response.json();
+    console.log(data);
+
+    // Notify the chef
+    notify(data.status, data.message);
+
+    // Clear the form and remove from display if successful
+    if (data.status === 'created') {
+      clearForm();
+      close();
+      // Reload the window to mark the category present in other fields
+      window.location.reload();
+    }
+  } catch (error) {
+    alert('An error has occurred. Please try again!');
+    console.error(error);
+  }
+}
+
+/**
+ * Sends a get request to the backend to retrieve a category's details by ID
+ * It then fills the form UI elements with the category's information
+ * @returns {Promise<void>} A Promise that resolves when the category is fetched
+ */
+export async function fetchCategory () {
+  try {
+    // Get the category's id
+    const id = document.getElementById('updateCategorySelect').value;
+
+    // Fetch the category's details
+    const response = await fetch(`/api/category/${id}`);
+    const data = await response.json();
+
+    // Check if category exists
+    if (data.status !== 'success') {
+      notify(data.status, data.message);
+      return;
+    }
+    // Populate the inputs of the update form
+    document.getElementById('updateCategoryNumber').value = data.data.id;
+    document.getElementById('updateCategoryName').value = data.data.name;
+    document.getElementById('updateCategoryDescription').value = data.data.description;
+  } catch (error) {
+    alert('An error has occurred. Please try again!');
+    console.error(error);
+  }
+}
+
+/**
+ * Sends a PUT request to the backend to update a category
+ * @returns {Promise<void>} A promise that resolves when the backend returns a response
+ */
+export async function updateCategory () {
+  try {
+    // Fetch the category's new data
+    const id = document.getElementById('updateCategoryNumber').value;
+    const name = document.getElementById('updateCategoryName').value;
+    const description = document.getElementById('updateCategoryDescription').value;
+
+    // Send the PUT request
+    const response = await fetch(`/api/category/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ name, description })
+    });
+    // Extract the response body
+    const data = await response.json();
+
+    // Notify the chef
+    notify(data.status, data.message);
+
+    // Exit if successful
+    if (data.status === 'success') {
+      close();
+      clearForm();
+    }
+  } catch (error) {
+    alert('An error has occurred. Please try again!');
+    console.error(error);
+  }
+}
+
+/**
+ * Sends a DELETE request to the backend
+ * @returns {Promise<void>} A promise that resolves when the backend responds
+ */
+export async function deleteCategory () {
+  // Get the category's primary key
+  const id = document.getElementById('deleteCategorySelect').value;
+  const name = document.getElementById('deleteCategorySelect').selectedOptions[0].text;
+
+  // Confirm if user wants to delete the category
+
+  if (!confirm(`Are you sure you want to delete ${name}?\nDeleting it also removes the food items in the category!`)) return;
+
+  try {
+    // Send the delete request
+    const response = await fetch(`/api/category/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    const data = await response.json();
+
+    // Notify the chef
+    notify(data.status, data.message);
+
+    // Exit if successful
+    if (data.status === 'success') {
+      close();
+      clearForm();
+    }
+  } catch (error) {
+    alert('An error has occurred. Please try again!');
+    console.error(error);
+  }
+}
