@@ -13,6 +13,10 @@ module.exports = sequelize.define(
       type: DataTypes.STRING(50),
       unique: true,
       allowNull: false
+    },
+    description: {
+      type: DataTypes.STRING(150),
+      allowNull: true
     }
   },
   {

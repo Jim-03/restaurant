@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chef</title>
     <link rel="shortcut icon" href="images/chef.png" type="image/x-icon" />
-    <link rel="stylesheet" href="./chef.css" />
+    <link rel="stylesheet" href="css/chef.css" />
     <link rel="stylesheet" href="css/notification.css" />
     <link
       rel="stylesheet"
@@ -125,17 +125,61 @@
       </section>
       <h2 class="section-header">Manage Categories</h2>
       <section class="chef-operations" id="categorySection">
-        <section class="crud">
+        <section class="crud" id="addCategory">
           <i class="fa-solid fa-tag"></i>
           <p>Add new category</p>
         </section>
-        <section class="crud">
+        <section id="categoryForm" class="background">
+          <form id="addCategoryForm">
+            <div class="closingDiv">
+              <p class="closeButton">&times;</p>
+            </div>
+            <input
+              type="text"
+              id="newCategoryName"
+              placeholder="The name of the category"
+            />
+            <textarea
+              id="newCategoryDescription"
+              placeholder="Describe the category in about 150 words"
+            ></textarea>
+            <button id="addCategoryButton">Add</button>
+            <button class="clearButton">Clear</button>
+          </form>
+        </section>
+        <section class="crud" id="updateCategory">
           <i class="fa-solid fa-list"></i>
           <p>Update A Category</p>
         </section>
-        <section class="crud">
+        <section class="background" id="updateCategoryForm">
+          <form>
+            <div class="closingDiv">
+              <p class="closeButton">&times;</p>
+            </div>
+            <select id="updateCategorySelect"></select>
+            <label for="updateCategoryNumber">Category number:</label>
+            <input type="text" id="updateCategoryNumber" readonly />
+            <label for="updateCategoryName">Category Name:</label>
+            <input type="text" id="updateCategoryName" placeholder="New Name" />
+            <textarea
+              id="updateCategoryDescription"
+              placeholder="Describe the category in 150 words"
+            ></textarea>
+            <button id="updateCategoryButton">Update</button>
+            <button class="clearButton">Clear</button>
+          </form>
+        </section>
+        <section class="crud" id="deleteCategory">
           <i class="fa-solid fa-trash"></i>
           <p>Delete A Category</p>
+        </section>
+        <section class="background" id="deleteCategoryForm">
+          <form>
+            <div class="closingDiv">
+              <p class="closeButton">&times;</p>
+            </div>
+            <select id="deleteCategorySelect"></select>
+          </form>
         </section>
       </section>
     </main>

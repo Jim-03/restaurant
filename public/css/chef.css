@@ -102,7 +102,8 @@ main {
   color: #e74c3c;
 }
 .background form input,
-.background form select {
+.background form select,
+.background form textarea {
   width: 90%;
   padding: 12px;
   margin: 10px 0;
@@ -128,19 +129,24 @@ main {
 }
 
 #addFoodButton,
-#updateFoodButton {
+#updateFoodButton,
+#addCategoryButton,
+#updateCategoryButton {
   background: rgb(46, 204, 113);
   color: white;
 }
+
 #addFoodButton:hover {
   background: rgb(39, 174, 96);
 }
-.clearButton, .deleteButton {
+.clearButton,
+.deleteButton {
   background: rgb(231, 76, 60);
   color: white;
   margin-top: 10px;
 }
-.clearButton:hover, .deleteButton:hover {
+.clearButton:hover,
+.deleteButton:hover {
   background: rgb(192, 57, 43);
 }
 .searchDiv {

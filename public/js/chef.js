@@ -6,7 +6,11 @@ import {
   addFood,
   searchFoodItems,
   updateFood,
-  deleteFood
+  deleteFood,
+  addCategory,
+  fetchCategory,
+  updateCategory,
+  deleteCategory
 } from './chef-util.js';
 
 // DOM manipulators
@@ -153,3 +157,32 @@ document
       .getElementById('deleteFoodButton')
       .addEventListener('click', () => deleteFood(food.id));
   });
+
+/**
+ * Displays the form to add a category
+ */
+document.getElementById('addCategory').addEventListener('click', () => {
+  document.getElementById('categoryForm').style.display = 'flex';
+});
+
+/**
+ * Displays the form to update a category
+ */
+document.getElementById('updateCategory').addEventListener('click', () => {
+  document.getElementById('updateCategoryForm').style.display = 'flex';
+});
+
+/**
+ * Displays a form that deletes a category
+ */
+document.getElementById('deleteCategory').addEventListener('click', () => {
+  document.getElementById('deleteCategoryForm').style.display = 'flex';
+});
+
+/**
+ * Event listeners to the category CRUD operations
+ */
+document.getElementById('addCategoryButton').addEventListener('click', addCategory);
+document.getElementById('updateCategorySelect').addEventListener('change', fetchCategory);
+document.getElementById('updateCategoryButton').addEventListener('click', updateCategory);
+document.getElementById('deleteCategorySelect').addEventListener('change', deleteCategory);
