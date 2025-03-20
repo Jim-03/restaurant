@@ -90,6 +90,51 @@ async function getFoodItemByName (name) {
 }
 
 /**
+ * Retrieves a food item's detail by its primary key
+ * @param id {Number} The food's primary key
+ * @returns {Promise<{
+ *     status: "rejected" | "not_found" | "success" | "error",
+ *     message: string,
+ *     data: Object | null
+ * }>} An object containing the food item's data or null
+ */
+async function getById (id) {
+  // Validate the id
+  if (id <= 0) {
+    return {
+      status: 'rejected',
+      message: 'Provide a valid id',
+      data: null
+    };
+  }
+
+  try {
+    // Get the food's details
+    const food = await findById(id);
+
+    // Check if food item exists
+    if (!food) {
+      return {
+        status: 'not_found',
+        message: "The specified food item wasn't found!",
+        data: null
+      };
+    }
+
+    return {
+      status: 'success',
+      message: 'Food item found',
+      data: food
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 'error',
+      message: "An error has occurred while fetching the food's details. Please try again!"
+    };
+  }
+}
+/**
  * Handles the business logic for retrieving a list of food items with a similar substring
  * @param {string} name The substring to search for
  * @returns {Promise<{
@@ -281,6 +326,7 @@ async function deleteFood (id) {
 module.exports = {
   addFood,
   getFoodList,
+  getById,
   getByCategory,
   getFoodItemByName,
   updateItem,
