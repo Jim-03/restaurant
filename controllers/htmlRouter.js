@@ -19,7 +19,7 @@ htmlRoute.get('/login', (req, res) => {
 /**
  * The chef route
  */
-htmlRoute.get("/chef", (req, res) => {
-  res.sendFile(template('chef.html'))
-})
+htmlRoute.get('/chef', (req, res) => {
+  res.sendFile(template('chef.html'));
+});
 module.exports = htmlRoute;
