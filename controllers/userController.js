@@ -8,7 +8,7 @@ const express = require('express');
 const userApi = express.Router();
 const statusCode = require('./getStatusCode');
 
-userApi.get('api/user', (req, res) => {
+userApi.get('/api/user', (req, res) => {
   service.getAll()
     .then(response => {
       res.status(statusCode(response.status)).json(response);
