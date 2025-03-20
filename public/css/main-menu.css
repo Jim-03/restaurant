@@ -202,3 +202,12 @@ footer a {
   color: white;
   margin-bottom: 30px;
 }
+
+@media (max-width: 720px) {
+  body {
+    font-size: 14px;
+  }
+  .header {
+    padding: 10px;
+  }
+}
