@@ -7,6 +7,9 @@ export function close () {
   document.getElementById('foodForm').style.display = 'none';
   document.getElementById('updateForm').style.display = 'none';
   document.getElementById('deleteFoodBackground').style.display = 'none';
+  document.getElementById('categoryForm').style.display = 'none';
+  document.getElementById('updateCategoryForm').style.display = 'none';
+  document.getElementById('deleteCategoryForm').style.display = 'none';
 }
 
 /**
