@@ -13,16 +13,24 @@ document.addEventListener('DOMContentLoaded', function () {
     const balanceInput = document.getElementById('balance');
     const calculateBalanceButton = document.getElementById('calculateBalance');
 
-    // Fetch orders from the backend
-    async function fetchOrders() {
-        try {
-            const response = await fetch('/api/get-orders'); // Update with actual API endpoint
-            const orders = await response.json();
-            displayOrders(orders);
-        } catch (error) {
-            console.error('Error fetching orders:', error);
-        }
+  // Fetch orders from the backend
+  async function fetchOrders () {
+    try {
+      // Fetch the list of unfinished orders from the backend
+      const response = await fetch('/api/order/unfinished');
+      const data = await response.json();
+
+      // Check if orders exists
+      if (data.status !== 'success') {
+        notify(data.status, data.message);
+        return;
+      }
+
+      displayOrders(data.list);
+    } catch (error) {
+      console.error('Error fetching orders:', error);
     }
+  }
 
     // Display incoming orders
     function displayOrders(orders) {
@@ -42,20 +50,46 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Display order details and set total amount
-    function displayOrderDetails(order) {
-        let orderHTML = `<h2>Order ID: ${order.id}</h2>`;
-        orderHTML += '<ul>';
-        order.items.forEach(item => {
-            orderHTML += `<li>${item.name} - KSH ${item.price.toFixed(2)}</li>`;
-        });
-        orderHTML += '</ul>';
-        orderHTML += `<p>Total: KSH ${order.total.toFixed(2)}</p>`;
-        orderDetails.innerHTML = orderHTML;
+  // Display order details and set total amount
+  async function displayOrderDetails (order) {
+    try {
+      let orderHTML = `<h2>Table: ${order.tableNumber}</h2>`;
 
-        // Set the total amount dynamically
-        totalAmountInput.value = order.total.toFixed(2);
+      // Fetch the list of items in the order
+      const response = await fetch(`/api/orderFood/${order.id}`);
+      const data = await response.json();
+
+      // Check if the list was successfully fetched
+      if (data.status !== 'success') {
+        notify(data.status, data.message);
+        return;
+      }
+
+      orderHTML += '<ul>';
+      for (const item of data.list) {
+        // Fetch the item's name
+        const response = await fetch(`/api/food/${item.foodItem}`);
+        const data = await response.json();
+
+        // Check if the item was successfully retrieved
+        if (data.status !== 'success') {
+          notify(data.status, data.message);
+          return;
+        }
+
+        //
+        orderHTML += `<li>${item.quantity} ${data.data.name} @ KSH ${item.price.toFixed(2)}</li>`;
+      }
+      orderHTML += '</ul>';
+      orderHTML += `<p>Total: KSH ${order.totalPrice.toFixed(2)}</p>`;
+      orderDetails.innerHTML = orderHTML;
+
+      // Set the total amount dynamically
+      totalAmountInput.value = order.totalPrice.toFixed(2);
+    } catch (error) {
+      console.error(error);
     }
+  }
 
     // function to calculate balance when button is clicked
     calculateBalanceButton.addEventListener('click', function () {
