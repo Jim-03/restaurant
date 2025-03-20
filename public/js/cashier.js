@@ -1,3 +1,5 @@
+import { notify } from "./util.js";
+
 document.addEventListener('DOMContentLoaded', function () {
     const orderDetails = document.getElementById('order-details');
     const paymentMethod = document.getElementById('payment-method');
