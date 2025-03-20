@@ -1,13 +1,27 @@
-const PORT = 5123;
-const HOST = 'localhost';
 const express = require('express');
 const { getDatabaseUrl, attemptDatabaseConnection } = require('./databaseUrl');
 const htmlRoute = require('./controllers/htmlRouter');
+const foodApi = require('./controllers/foodController');
+const userApi = require('./controllers/userController');
+const categoryApi = require('./controllers/categoryController');
+const orderApi = require('./controllers/orderController')
+const orderFoodApi = require('./controllers/orderFoodController')
+
+const PORT = 5123;
+const HOST = 'localhost';
 const app = express();
+
 app.set('views', 'templates');
 app.use(express.static('public'));
 
+app.use(express.json());
+
+app.use(foodApi);
 app.use(htmlRoute);
+app.use(userApi);
+app.use(categoryApi);
+app.use(orderApi)
+app.use(orderFoodApi)
 
 async function startServer () {
   try {
