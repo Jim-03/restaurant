@@ -14,10 +14,6 @@ const role = require('./models/roles_model');
  * Define the relationships
  */
 
-// A role has many users but a user has only one role
-role.hasMany(user, { foreignKey: 'role_id' });
-user.belongsTo(role, { foreignKey: 'role_id' });
-
 // A server can take many orders but an order is taken by a single server
 user.hasMany(order, { foreignKey: 'waiter_id' });
 order.belongsTo(user, { foreignKey: 'waiter_id' });

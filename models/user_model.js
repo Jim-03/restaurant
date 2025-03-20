@@ -34,13 +34,8 @@ module.exports = sequelize.define(
       field: 'full_name'
     },
     role: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'roles',
-        key: 'id'
-      },
+      type: DataTypes.ENUM("server", "administrator", "cashier", "chef"),
       allowNull: false,
-      field: 'role_id'
     }
   },
   { tableName: 'users', timestamps: true }
