@@ -17,6 +17,13 @@ categoryApi.post('/api/category', (req, res) => {
     });
 });
 
+categoryApi.get('/api/category/:id', (req, res) => {
+  service.get(Number(req.params.id))
+    .then(response => {
+      res.status(getStatusCode(response.status)).json(response);
+    });
+});
+
 categoryApi.put('/api/category/:id', (req, res) => {
   service.updateCategory(Number(req.params.id), req.body)
     .then(response => {

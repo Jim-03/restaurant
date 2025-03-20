@@ -45,6 +45,53 @@ async function addCategory (category) {
 }
 
 /**
+ *
+ * @param {Number} id The category's primary key
+ * @returns {Promise<{
+ *    status: "rejected" | "not_found" | "success" | "error",
+ *    message: string,
+ *    data: Object | null
+ * }>} An object containing the category's data
+ */
+async function get (id) {
+  // Validate the id
+  if (id <= 0) {
+    return {
+      status: 'rejected',
+      message: 'Provide a valid id!',
+      data: null
+    };
+  }
+
+  try {
+    // Fetch the category's details
+    const category = await repo.findById(id);
+
+    // Check if category exists
+    if (!category) {
+      return {
+        status: 'not_found',
+        message: "The specified category wasn't found!",
+        data: null
+      };
+    }
+
+    return {
+      status: 'success',
+      message: 'Category found',
+      data: category
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 'error',
+      message: 'An error has occurred while fetching the category. Please try again!',
+      data: null
+    };
+  }
+}
+
+/**
  * Handles the logic for retrieving a list of all categories
  * @returns {Promise<{
  *     status: "not_found" | "success" | "error",
@@ -174,6 +221,7 @@ async function deleteCategory (id) {
 
 module.exports = {
   addCategory,
+  get,
   getAll,
   updateCategory,
   deleteCategory
