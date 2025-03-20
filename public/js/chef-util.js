@@ -128,6 +128,11 @@ export function clearForm () {
   document.querySelectorAll('select').forEach((select) => {
     select.value = '';
   });
+
+  // Iterate through each text area and clear its value
+  document.querySelectorAll('textarea').forEach(textArea => {
+    textArea.value = '';
+  });
 }
 
 /**
