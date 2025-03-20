@@ -1,4 +1,4 @@
-import { notify } from "./util.js";
+import { notify } from './util.js';
 
 document.addEventListener('DOMContentLoaded', function () {
   newPaymentMethod();
