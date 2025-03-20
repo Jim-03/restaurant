@@ -22,4 +22,11 @@ htmlRoute.get('/login', (req, res) => {
 htmlRoute.get('/chef', (req, res) => {
   res.sendFile(template('chef.html'));
 });
+
+/**
+ * The cashier route
+ */
+htmlRoute.get("/cashier", (req, res) => {
+  res.sendFile(template('cashier.html'))
+})
 module.exports = htmlRoute;
