@@ -6,6 +6,7 @@ const userApi = require('./controllers/userController');
 const categoryApi = require('./controllers/categoryController');
 const orderApi = require('./controllers/orderController')
 const orderFoodApi = require('./controllers/orderFoodController')
+const paymentMethodApi = require('./controllers/paymentMethodController')
 
 const PORT = 5123;
 const HOST = 'localhost';
@@ -22,6 +23,7 @@ app.use(userApi);
 app.use(categoryApi);
 app.use(orderApi)
 app.use(orderFoodApi)
+app.use(paymentMethodApi)
 
 async function startServer () {
   try {
