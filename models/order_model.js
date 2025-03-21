@@ -29,7 +29,7 @@ module.exports = sequelize.define(
         model: 'users',
         key: 'id'
       },
-      field: 'server_id'
+      field: 'waiter_id'
     },
     tableNumber: {
       type: DataTypes.INTEGER,
