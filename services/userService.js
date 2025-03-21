@@ -117,7 +117,7 @@ async function add (user) {
 
   try {
     // Check if user's data violate constraints
-    const userExists = repo.exists();
+    const userExists = await repo.exists(user);
 
     if (userExists) {
       return {
