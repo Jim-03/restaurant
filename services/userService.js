@@ -127,7 +127,7 @@ async function add (user) {
     }
 
     // Hash the user's password
-    user.password = bcrypt.hash(user.password, bcrypt.genSalt(10));
+    user.password = await bcrypt.hash(user.password, await bcrypt.genSalt(10));
 
     await repo.save(user);
     return {
