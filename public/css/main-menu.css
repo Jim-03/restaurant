@@ -202,3 +202,77 @@ footer a {
   color: white;
   margin-bottom: 30px;
 }
+/*the following are to handle a smaller screen size like a phone*/
+@media (max-width: 720px) {
+  body {
+    font-size: 14px;
+    overflow-x: hidden;
+  }
+
+  header {
+    padding: 10px;
+    text-align: center;
+  }
+
+  #categories {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+  }
+
+  #categories button {
+    width: auto;
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+
+  main {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+  }
+
+  #displaySection {
+    width: 95%;
+    height: auto;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  #cartSection {
+    width: 95%;
+    height: auto;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+
+  .foodItem {
+    width: 90%;
+    height: auto;
+    padding: 15px;
+  }
+
+  .foodName {
+    font-size: 24px;
+  }
+
+  .orderedFood {
+    width: 100%;
+  }
+
+  .orderedFoodName {
+    font-size: 18px;
+  }
+
+  .addQuantity,
+  .reduceQuantity {
+    width: 25px;
+    height: 25px;
+    font-size: 16px;
+  }
+
+  footer {
+    padding: 15px;
+    text-align: center;
+  }
+}
