@@ -119,7 +119,7 @@ async function makeOrder () {
     // Get the table number from the user
     tableNumber: prompt('Identify the table number'),
     // Create the order status as processing
-    orderStatus: 'processing'
+    orderStatus: 'unpaid'
   };
 
   // Send the order to the database
