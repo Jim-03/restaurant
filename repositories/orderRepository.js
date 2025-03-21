@@ -48,7 +48,7 @@ async function findByIncomplete () {
  */
 async function findByServer (id) {
   try {
-    return await orderModel.findAll({ where: { waiter: id } });
+    return await orderModel.findAll({ where: { waiter_id: id } });
   } catch (e) {
     throw new Error(`An error has occurred while fetching the list of orders made by the server: ${e.message}`);
   }
