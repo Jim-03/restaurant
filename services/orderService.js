@@ -4,7 +4,6 @@
  */
 
 const repo = require('../repositories/orderRepository');
-const { findByDateRange } = require('../repositories/orderRepository');
 
 /**
  * Handles the logic of fetching an order's data
