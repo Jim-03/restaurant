@@ -16,18 +16,12 @@ orderApi.get('/api/order/unfinished', (req, res) => {
     });
 });
 
-orderApi.get('/api/order/month/:month', (req, res) => {
-  service.getByMonth(Number(req.params.month))
-    .then(response => {
-      res.status(statusCode(response.status)).json(response);
-    });
-});
-orderApi.get('/api/order/month/:year', (req, res) => {
-  service.getByYear(Number(req.params.year))
-    .then(response => {
-      res.status(statusCode(response.status)).json(response);
-    });
-});
+orderApi.post('/api/order/date', (req, res) => {
+  service.getByDateRange(req.body)
+  .then(response => {
+    res.status(statusCode(response.status)).json(response)
+  })
+})
 orderApi.get('/api/order/server/:id', (req, res) => {
   service.getByServer(Number(req.params.id))
     .then(response => {
