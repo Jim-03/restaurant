@@ -55,15 +55,7 @@ function updateReportData(data) {
 async function fetchReportData() {
     showLoading();
     try {
-        const { start, end } = getDateRange();
-        if (start && end && start > end) { console.error('Start date must be before end date'); return; }
-        const response = await fetch('/api/reports', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ start, end })
-        });
-        const data = await response.json();
-        updateReportData(data);
+        updateReportData(await getReport());
     } catch (error) {
         console.error('Error fetching report data:', error);
     }
