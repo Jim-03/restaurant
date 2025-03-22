@@ -10,9 +10,10 @@
 <body>
     <div class="container">
         <nav class="sidebar">
-            <h2></i> Admin</h2>
+            <h2> Admin</h2>
             <ul>
                 <li><a href="#overview" class="active"><i class="fas fa-tachometer-alt"></i> Overview</a></li>
+                <li><a href="#user-management"><i class="fas fa-users"></i> User Management</a></li>
                 <li><a href="#user-details"><i class="fas fa-user"></i> User Details</a></li>
             </ul>
         </nav>
@@ -57,9 +58,30 @@
                     <div class="card"><h3><i class="fas fa-money-bill"></i> Stock Value</h3><p id="stock-value"><i class="fas fa-spinner fa-spin"></i></p><span class="tooltip" title="Total value of inventory">ℹ️</span></div>
                 </div>
             </div>
+            <div class="report-section" id="user-management-section" style="display: none;">
+                <h2><i class="fas fa-users"></i> User Management</h2>
+                <button class="add-user-btn"><i class="fas fa-plus"></i> Add New User</button>
+                <div class="user-list">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="user-table-body">
+                            <!-- Users will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
             <div class="report-section" id="user-details-section" style="display: none;">
-                <h2><i class="fas fa-user-edit"></i> User Details</h2>
+                <h2><i class="fas fa-user-edit"></i> <span id="user-form-title">Edit User</span></h2>
                 <form id="user-details-form" class="user-form">
+                    <input type="hidden" id="user-id" name="user-id">
                     <div class="form-group">
                         <label for="user-name">Full Name <span class="info-tooltip" title="Enter the user's full name">ℹ️</span></label>
                         <input type="text" id="user-name" name="user-name" placeholder="e.g., John Snow" required aria-required="true">
@@ -95,6 +117,7 @@
                         </select>
                     </div>
                     <button type="submit" class="save-btn"><i class="fas fa-save"></i> Save Changes</button>
+                    <button type="button" class="delete-btn" id="delete-user-btn" style="display: none;"><i class="fas fa-trash"></i> Delete User</button>
                     <div id="feedback" class="feedback-message"></div>
                 </form>
             </div>
