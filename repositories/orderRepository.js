@@ -56,8 +56,8 @@ async function findByServer (id) {
 
 /**
  * Retrieves a list of orders made  between two dates
- * @param start
- * @param end
+ * @param {Date} start 
+ * @param {Date} end
  * @returns {Promise<orderModel[] | null>} An object containing the list of orders or null
  * @throws {Error} In case of any errors
  */
