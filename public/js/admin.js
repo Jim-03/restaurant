@@ -42,14 +42,15 @@ function showLoading() {
 }
 
 function updateReportData(data) {
-    document.getElementById('total-sales').textContent = data.sales.total || '';
-    document.getElementById('avg-order-value').textContent = data.sales.avgOrder || '';
-    document.getElementById('top-selling-item').textContent = data.sales.topItem || '';
-    document.getElementById('orders-processed').textContent = data.sales.orders || '';
-    document.getElementById('total-items').textContent = data.inventory.total || '';
-    document.getElementById('low-stock-items').textContent = data.inventory.lowStock || '';
-    document.getElementById('most-used-item').textContent = data.inventory.mostUsed || '';
-    document.getElementById('stock-value').textContent = data.inventory.value || '';
+    if (!data) return
+    document.getElementById('total-sales').textContent = data.totalSales || '';
+    document.getElementById('avg-order-value').textContent = data.avgValue || '';
+    document.getElementById('top-selling-item').textContent = data.topSellingItem || '';
+    document.getElementById('orders-processed').textContent = data.ordersProcessed || '';
+    document.getElementById('total-items').textContent = data.totalItems || '';
+    document.getElementById('low-stock-items').textContent = data.lowStockItems || '';
+    document.getElementById('most-used-item').textContent = data.mostUsedItem || '';
+    document.getElementById('stock-value').textContent = data.stockValue || '';
 }
 
 async function fetchReportData() {
