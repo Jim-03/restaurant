@@ -137,88 +137,32 @@ async function getByServer (id) {
 }
 
 /**
- * Handles the logic for retrieving orders made in a specific month of the current year
- * @param {number} month The month number ranging from 0-11
+ * Retrieves a list of orders made within a certain date range
+ * @param {{start: Date, end: Date}} dates An object containing the start and end dates
  * @returns {Promise<{
  *     status: "rejected" | "not_found" | "success" | "error",
  *     message: string,
- *     list: null | []
- * }>} An object with the orders list or null
+ *     list: Array | null
+ * }>} The object containing the list of orders or null
  */
-async function getByMonth (month) {
-  // Validate the month number
-  if (month < 0 || month > 11) {
+async function getByDateRange (dates) {
+  if (!dates || Object.keys(dates).length !== 2) {
     return {
       status: 'rejected',
-      message: 'Provide a valid month number (0-11)!',
-      list: null
-    };
-  }
-
-  const now = new Date();
-  const year = now.getFullYear();
-  const startOfMonth = new Date(year, month, 1);
-  const endOfMonth = new Date(year, month + 1, 0, 23, 59, 59);
-
-  try {
-    // Fetch orders within the month range
-    const ordersInMonth = await repo.findByDateRange(startOfMonth, endOfMonth);
-
-    // Check if orders exist
-    if (!ordersInMonth || ordersInMonth.length === 0) {
-      return {
-        status: 'not_found',
-        message: 'No orders found for the specified month!',
-        list: null
-      };
-    }
-
-    return {
-      status: 'success',
-      message: 'Orders found',
-      list: Array.isArray(ordersInMonth) ? ordersInMonth : [ordersInMonth]
-    };
-  } catch (e) {
-    console.error(e);
-    return {
-      status: 'error',
-      message: 'An error has occurred while fetching orders for the specified month. Please try again!',
-      list: null
-    };
-  }
-}
-
-/**
- * Handles the logic for retrieving the orders made in a certain year
- * @param {number} year
- * @returns {Promise<{
- *     status: "rejected" | "not_found" | "success" | "error",
- *     message: string,
- *     list: null | []
- * }>} An object with the orders list or null
- */
-async function getByYear (year) {
-  // Validate the year
-  if (!Number.isInteger(year) || year < 1000 || year > new Date().getFullYear()) {
-    return {
-      status: 'rejected',
-      message: 'Provide a valid year!',
+      message: 'Provide the starting and ending dates',
       list: null
     };
   }
 
   try {
-    const start = new Date(year, 0, 1, 0, 0, 0);
-    const end = new Date(year, 11, 31, 23, 59, 59);
-
     // Fetch the list of orders
-    const ordersInYear = await findByDateRange(start, end);
+    const orders = await repo.findByDateRange(dates.start, dates.end);
 
-    // Check if orders exist
-    if (!ordersInYear || ordersInYear.length === 0) {
+    // Check if the orders exist
+    if (!orders || orders.length === 0) {
       return {
         status: 'not_found',
-        message: 'No orders found for the specified year!',
+        message: 'There are no orders at the specified period!',
         list: null
       };
     }
@@ -226,13 +170,13 @@ async function getByYear (year) {
     return {
       status: 'success',
       message: 'Orders found',
-      list: Array.isArray(ordersInYear) ? ordersInYear : [ordersInYear]
+      list: Array.isArray(orders) ? orders : [orders]
     };
-  } catch (e) {
-    console.error(e);
+  } catch (error) {
+    console.error(error);
     return {
       status: 'error',
-      message: 'An error has occurred while fetching orders for the specified year. Please try again!',
+      message: 'An error has occurred while fetching the orders. Please try again!',
       list: null
     };
   }
@@ -371,4 +315,4 @@ async function remove (id) {
     };
   }
 }
-module.exports = { get, getIncompleteOrders, getByServer, getByMonth, getByYear, add, update, remove };
+module.exports = { get, getIncompleteOrders, getByServer, getByDateRange, add, update, remove };
