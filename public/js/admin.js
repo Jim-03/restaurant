@@ -1,3 +1,5 @@
+import { getReport } from "./admin-util.js";
+
 const datePreset = document.getElementById('datePreset');
 const customDate = document.querySelector('.custom-date');
 const startDate = document.getElementById('start-date');
