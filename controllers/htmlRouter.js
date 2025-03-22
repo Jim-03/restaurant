@@ -36,4 +36,11 @@ htmlRoute.get("/cashier", (req, res) => {
 htmlRoute.get("/server", (req, res) => {
   res.sendFile(template("thewaiter.html"))
 })
+
+/**
+ * The admin route
+ */
+htmlRoute.get("/admin", (req, res) => {
+  res.sendFile(template("admin.html"))
+})
 module.exports = htmlRoute;
