@@ -2,6 +2,14 @@ const datePreset = document.getElementById('datePreset');
 const customDate = document.querySelector('.custom-date');
 const startDate = document.getElementById('start-date');
 const endDate = document.getElementById('end-date');
+const userTableBody = document.getElementById('user-table-body');
+const addUserBtn = document.querySelector('.add-user-btn');
+const deleteUserBtn = document.getElementById('delete-user-btn');
+const userForm = document.getElementById('user-details-form');
+const feedback = document.getElementById('feedback');
+const userFormTitle = document.getElementById('user-form-title');
+const sidebarLinks = document.querySelectorAll('.sidebar a');
+const sections = document.querySelectorAll('.report-section');
 
 function getDateRange() {
     const today = new Date();
@@ -78,9 +86,6 @@ document.querySelectorAll('.export-btn').forEach(btn => {
     });
 });
 
-const sidebarLinks = document.querySelectorAll('.sidebar a');
-const sections = document.querySelectorAll('.report-section');
-
 function showSection(sectionId) {
     sections.forEach(section => {
         section.style.display = section.id === `${sectionId}-section` ? 'block' : 'none';
@@ -88,6 +93,9 @@ function showSection(sectionId) {
     sidebarLinks.forEach(link => {
         link.classList.toggle('active', link.getAttribute('href') === `#${sectionId}`);
     });
+    
+    if (sectionId === 'user-management') loadUsers();
+    else if (sectionId === 'overview') fetchReportData();
 }
 
 sidebarLinks.forEach(link => {
@@ -95,13 +103,8 @@ sidebarLinks.forEach(link => {
         e.preventDefault();
         const sectionId = this.getAttribute('href').substring(1);
         showSection(sectionId);
-        if (sectionId === 'user-details') loadUserDetails();
-        else fetchReportData();
     });
 });
-
-const userForm = document.getElementById('user-details-form');
-const feedback = document.getElementById('feedback');
 
 function showFeedback(element, message, type) {
     element.textContent = message;
@@ -110,25 +113,66 @@ function showFeedback(element, message, type) {
     setTimeout(() => element.classList.remove('visible'), 3000);
 }
 
-function loadUserDetails() {
-    fetch('/api/user')
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('user-name').value = data.name || '';
-            document.getElementById('user-username').value = data.username || '';
-            document.getElementById('user-email').value = data.email || '';
-            document.getElementById('user-phone').value = data.phone || '';
-            document.getElementById('user-gender').value = data.gender || '';
-            document.getElementById('user-role').value = data.role || 'admin';
-        })
-        .catch(error => {
-            console.error('Error loading user details:', error);
-            showFeedback(feedback, 'Failed to load user details', 'error');
+async function loadUsers() {
+    try {
+        const response = await fetch('/api/users');
+        const users = await response.json();
+        userTableBody.innerHTML = '';
+        users.forEach(user => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${user.name}</td>
+                <td>${user.username}</td>
+                <td>${user.email}</td>
+                <td>${user.role}</td>
+                <td>
+                    <button class="edit-btn" data-id="${user.id}"><i class="fas fa-edit"></i> Edit</button>
+                </td>
+            `;
+            userTableBody.appendChild(tr);
         });
+
+        document.querySelectorAll('.edit-btn').forEach(btn => {
+            btn.addEventListener('click', () => editUser(btn.dataset.id));
+        });
+    } catch (error) {
+        console.error('Error loading users:', error);
+        showFeedback(feedback, 'Failed to load users', 'error');
+    }
+}
+
+async function editUser(userId) {
+    showSection('user-details');
+    userFormTitle.textContent = 'Edit User';
+    deleteUserBtn.style.display = 'inline-flex';
+    document.getElementById('user-id').value = userId;
+
+    try {
+        const response = await fetch(`/api/users/${userId}`);
+        const user = await response.json();
+        document.getElementById('user-name').value = user.name || '';
+        document.getElementById('user-username').value = user.username || '';
+        document.getElementById('user-email').value = user.email || '';
+        document.getElementById('user-phone').value = user.phone || '';
+        document.getElementById('user-gender').value = user.gender || '';
+        document.getElementById('user-role').value = user.role || 'admin';
+    } catch (error) {
+        console.error('Error loading user:', error);
+        showFeedback(feedback, 'Failed to load user details', 'error');
+    }
+}
+
+function createNewUser() {
+    showSection('user-details');
+    userFormTitle.textContent = 'Add New User';
+    deleteUserBtn.style.display = 'none';
+    userForm.reset();
+    document.getElementById('user-id').value = '';
 }
 
 async function saveUserDetails(e) {
     e.preventDefault();
+    const userId = document.getElementById('user-id').value;
     const userData = {
         name: document.getElementById('user-name').value,
         username: document.getElementById('user-username').value,
@@ -137,27 +181,70 @@ async function saveUserDetails(e) {
         gender: document.getElementById('user-gender').value,
         role: document.getElementById('user-role').value
     };
+    
     const saveBtn = userForm.querySelector('.save-btn');
     saveBtn.disabled = true;
     saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+
     try {
-        const response = await fetch('/api/user/update', {
-            method: 'PUT',
+        const url = userId ? `/api/users/${userId}` : '/api/users';
+        const method = userId ? 'PUT' : 'POST';
+        const response = await fetch(url, {
+            method: method,
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(userData)
         });
-        if (!response.ok) throw new Error('Update failed');
+        
+        if (!response.ok) throw new Error(`${userId ? 'Update' : 'Create'} failed`);
+        
         saveBtn.innerHTML = '<i class="fas fa-save"></i> Save Changes';
         saveBtn.disabled = false;
-        showFeedback(feedback, 'User details saved successfully!', 'success');
+        showFeedback(feedback, `User ${userId ? 'updated' : 'created'} successfully!`, 'success');
+        
+        if (!userId) {
+            userForm.reset();
+        }
+        loadUsers();
     } catch (error) {
-        console.error('Error saving user details:', error);
+        console.error(`Error ${userId ? 'updating' : 'creating'} user:`, error);
         saveBtn.innerHTML = '<i class="fas fa-save"></i> Save Changes';
         saveBtn.disabled = false;
-        showFeedback(feedback, 'Failed to save user details', 'error');
+        showFeedback(feedback, `Failed to ${userId ? 'update' : 'create'} user`, 'error');
     }
 }
 
+async function deleteUser() {
+    const userId = document.getElementById('user-id').value;
+    if (!userId) return;
+    
+    if (!confirm('Are you sure you want to delete this user?')) return;
+    
+    deleteUserBtn.disabled = true;
+    deleteUserBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Deleting...';
+    
+    try {
+        const response = await fetch(`/api/users/${userId}`, {
+            method: 'DELETE'
+        });
+        
+        if (!response.ok) throw new Error('Delete failed');
+        
+        deleteUserBtn.disabled = false;
+        deleteUserBtn.innerHTML = '<i class="fas fa-trash"></i> Delete User';
+        showFeedback(feedback, 'User deleted successfully!', 'success');
+        userForm.reset();
+        showSection('user-management');
+        loadUsers();
+    } catch (error) {
+        console.error('Error deleting user:', error);
+        deleteUserBtn.disabled = false;
+        deleteUserBtn.innerHTML = '<i class="fas fa-trash"></i> Delete User';
+        showFeedback(feedback, 'Failed to delete user', 'error');
+    }
+}
+
+addUserBtn.addEventListener('click', createNewUser);
+deleteUserBtn.addEventListener('click', deleteUser);
 userForm.addEventListener('submit', saveUserDetails);
 
 showSection('overview');
