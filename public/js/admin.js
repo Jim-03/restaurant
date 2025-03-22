@@ -13,7 +13,7 @@ const userFormTitle = document.getElementById('user-form-title');
 const sidebarLinks = document.querySelectorAll('.sidebar a');
 const sections = document.querySelectorAll('.report-section');
 
-function getDateRange() {
+export function getDateRange() {
     const today = new Date();
     let start, end;
     switch(datePreset.value) {
