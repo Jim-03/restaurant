@@ -78,3 +78,19 @@ export function displayFood (foodList) {
     display.appendChild(foodSection);
   });
 }
+
+/**
+ * Retrieves a user's details from the session storage
+ * @returns {{
+ *     id: Number,
+ *     username: string,
+ *     fullName: string,
+ *     role: string,
+ *     gender: "male" | "female",
+ *     phone: string,
+ *     email: string
+ * }} The user object
+ */
+export function getUserData() {
+  return JSON.parse(sessionStorage.getItem("userData"))
+}
