@@ -75,7 +75,7 @@ document.querySelectorAll('.export-btn').forEach(btn => {
                 body: JSON.stringify({ start, end })
             });
             console.log(`Successfully exported to ${format.toUpperCase()}`);
-            fetchReportData();
+            await fetchReportData();
         } catch (error) {
             console.error('Export failed:', error);
         }
