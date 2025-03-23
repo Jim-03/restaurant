@@ -91,6 +91,6 @@ export function displayFood (foodList) {
  *     email: string
  * }} The user object
  */
-export function getUserData() {
-  return JSON.parse(sessionStorage.getItem("userData"))
+export function getUserData () {
+  return JSON.parse(sessionStorage.getItem('userData'));
 }

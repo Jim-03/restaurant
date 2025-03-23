@@ -118,9 +118,9 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
       }
 
-      const now = new Date()
-      const date = now.toISOString().split('T')[0]
-      const time = now.toTimeString().split(' ')[0]
+      const now = new Date();
+      const date = now.toISOString().split('T')[0];
+      const time = now.toTimeString().split(' ')[0];
 
       // Create the payment model
       const payment = {
@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function () {
         amountToReturn: balanceInput.value,
         dateOfPayment: date,
         timePaid: time
-      }
+      };
 
       // Send the payment to the backend
       const response = await fetch('/api/payment', {
@@ -138,14 +138,14 @@ document.addEventListener('DOMContentLoaded', function () {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(payment)
-      })
-      const data = await response.json()
+      });
+      const data = await response.json();
 
       // Notify if an error occurred
-      notify(data.status, data.message)
+      notify(data.status, data.message);
 
       // Exit if an error occurs
-      if (data.status !== "created") return
+      if (data.status !== 'created') return;
 
       // Update the order details
       const updateResponse = await fetch(`/api/order/${orderId}`, {
@@ -153,20 +153,19 @@ document.addEventListener('DOMContentLoaded', function () {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({payment: data.id, waiter: Number(waiter.value)})
-      })
-      const updateData = await updateResponse.json()
+        body: JSON.stringify({ payment: data.id, waiter: Number(waiter.value) })
+      });
+      const updateData = await updateResponse.json();
 
       // Notify the cashier
-      notify(updateData.status, updateData.message)
+      notify(updateData.status, updateData.message);
 
       // Refresh the page when successful
-      if (data.status === "success") {
-        window.location.reload()
+      if (data.status === 'success') {
+        window.location.reload();
       }
-
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
   });
 

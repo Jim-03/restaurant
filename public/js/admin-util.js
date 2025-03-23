@@ -1,54 +1,53 @@
-import { notify } from "./util.js";
-import {getDateRange} from './admin.js'
+import { notify } from './util.js';
+import { getDateRange } from './admin.js';
 
 /**
  * Retrieves the general report of the entire system's data
  * @returns {Promise<null|{totalSales: string, avgValue: string, topSellingItem: string, ordersProcessed: *, lowStockItems: number, mostUsedItem: string, stockValue: string, totalItems: number}>} An object containing the general system's data
  */
-export async function getReport() {
+export async function getReport () {
   try {
     // Fetch the list of orders for the specified data
-    let dates = getDateRange();
-    let response = await fetch(`/api/order/date`, {
-      method: "POST",
+    const dates = getDateRange();
+    const response = await fetch('/api/order/date', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify(dates),
+      body: JSON.stringify(dates)
     });
-    let data = await response.json();
+    const data = await response.json();
 
-    console.log(data)
+    console.log(data);
     // Check if the orders were retrieved successfully
-    if (data.status !== "success") {
+    if (data.status !== 'success') {
       notify(data.status, data.message);
       return;
     }
-
 
     // Extract the list of completed orders
     const orders = [];
 
     data.list.forEach(order => {
-      if (order.orderStatus === "completed") {
-        orders.push(order)
+      if (order.orderStatus === 'completed') {
+        orders.push(order);
       }
-    })
+    });
 
     let totalSales = 0;
-    let orderCount = orders.length;
-    let itemCounts = {};
-    let stockValues = {};
+    const orderCount = orders.length;
+    const itemCounts = {};
+    const stockValues = {};
     let allItems = [];
 
     // Iterate over the orders list
     for (const order of orders) {
       // Fetch the ordered food items in the order
-      let itemResponse = await fetch(`/api/orderFood/${order.id}`);
-      let data = await itemResponse.json();
+      const itemResponse = await fetch(`/api/orderFood/${order.id}`);
+      const data = await itemResponse.json();
 
       // Check if the food list was retrieved  successfully
-      if (data.status !== "success") {
+      if (data.status !== 'success') {
         notify(data.status, data.message);
         return;
       }
@@ -73,32 +72,32 @@ export async function getReport() {
       }
     }
 
-    let topSellingItem = Object.keys(itemCounts).reduce(
+    const topSellingItem = Object.keys(itemCounts).reduce(
       (a, b) => (itemCounts[a] > itemCounts[b] ? a : b),
-      ""
+      ''
     );
-    let lowStockItems = Object.keys(itemCounts).filter(
+    const lowStockItems = Object.keys(itemCounts).filter(
       (item) => itemCounts[item] < 5
     );
-    let mostUsedItem = Object.keys(itemCounts).reduce(
+    const mostUsedItem = Object.keys(itemCounts).reduce(
       (a, b) => (stockValues[a] > stockValues[b] ? a : b),
-      ""
+      ''
     );
-    let totalItems = allItems.length;
-    let stockValue = Object.values(stockValues).reduce((a, b) => a + b, 0);
+    const totalItems = allItems.length;
+    const stockValue = Object.values(stockValues).reduce((a, b) => a + b, 0);
 
     return {
       totalSales: totalSales.toFixed(2),
       avgValue: (totalSales / orderCount).toFixed(2),
-      topSellingItem: topSellingItem,
+      topSellingItem,
       ordersProcessed: orderCount,
       lowStockItems: lowStockItems.length,
-      mostUsedItem: mostUsedItem,
+      mostUsedItem,
       stockValue: stockValue.toFixed(2),
-      totalItems: totalItems,
+      totalItems
     };
   } catch (error) {
-    console.error("Error fetching order data:", error);
-    return null
+    console.error('Error fetching order data:', error);
+    return null;
   }
 }

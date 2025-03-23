@@ -1,4 +1,4 @@
-import {getUserData, notify} from './util.js';
+import { getUserData, notify } from './util.js';
 
 const ordersPreviewList = document.getElementById('ordersPreview');
 const ordersTaken = document.getElementById('ordersTaken');
@@ -15,9 +15,9 @@ async function loadOrders () {
   const id = getUserData().id;
   const role = getUserData().role;
   // Ensure the role is authorized
-   if (role !== "server" && role !== "admin") {
+  if (role !== 'server' && role !== 'admin') {
     // Relocate to unauthorized page
-    window.location.href = "/unauthorized";
+    window.location.href = '/unauthorized';
     return;
   }
 
