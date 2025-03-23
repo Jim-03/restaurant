@@ -200,7 +200,7 @@ async function saveUserDetails(e) {
     saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
 
     try {
-        const url = userId ? `/api/users/${userId}` : '/api/users';
+        const url = userId ? `/api/user/${userId}` : '/api/user';
         const method = userId ? 'PUT' : 'POST';
         const response = await fetch(url, {
             method: method,
