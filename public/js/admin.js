@@ -175,6 +175,7 @@ async function saveUserDetails(e) {
         phone: document.getElementById('user-phone').value,
         gender: document.getElementById('user-gender').value,
         role: document.getElementById('user-role').value
+        password: document.getElementById('user-password').value
     };
     
     const saveBtn = userForm.querySelector('.save-btn');
