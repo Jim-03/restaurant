@@ -113,11 +113,20 @@ async function loadUsers() {
     try {
         const response = await fetch('/api/users');
         const users = await response.json();
+        const response = await fetch('/api/user');
+        const data = await response.json();
+
+        // Check if users were retrieved successfully
+        if (data.status !== "success") {
+            notify(data.status, data.message)
+            return
+        }
+
         userTableBody.innerHTML = '';
-        users.forEach(user => {
+        data.list.forEach(user => {
             const tr = document.createElement('tr');
             tr.innerHTML = `
-                <td>${user.name}</td>
+                <td>${user.fullName}</td>
                 <td>${user.username}</td>
                 <td>${user.email}</td>
                 <td>${user.role}</td>
