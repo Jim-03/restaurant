@@ -34,8 +34,9 @@ module.exports = sequelize.define(
       field: 'full_name'
     },
     role: {
-      type: DataTypes.ENUM("server", "administrator", "cashier", "chef"),
       allowNull: false,
+      type: DataTypes.ENUM('server', 'admin', 'cashier', 'chef'),
+      allowNull: false
     }
   },
   { tableName: 'users', timestamps: true }

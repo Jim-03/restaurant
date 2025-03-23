@@ -111,8 +111,6 @@ function showFeedback(element, message, type) {
 
 async function loadUsers() {
     try {
-        const response = await fetch('/api/users');
-        const users = await response.json();
         const response = await fetch('/api/user');
         const data = await response.json();
 
