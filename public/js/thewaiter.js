@@ -15,11 +15,11 @@ async function loadOrders () {
   const id = getUserData().id;
   const role = getUserData().role;
   // Ensure the role is authorized
-  /* if (role !== "server" || role !== "admin") {
+   if (role !== "server" && role !== "admin") {
     // Relocate to unauthorized page
     window.location.href = "/unauthorized";
     return;
-  } */
+  }
 
   try {
     // Fetch the list of orders
