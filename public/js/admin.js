@@ -1,4 +1,5 @@
 import { getReport } from "./admin-util.js";
+import {notify} from "./util.js";
 
 const datePreset = document.getElementById('datePreset');
 const customDate = document.querySelector('.custom-date');
@@ -174,7 +175,7 @@ async function saveUserDetails(e) {
         email: document.getElementById('user-email').value,
         phone: document.getElementById('user-phone').value,
         gender: document.getElementById('user-gender').value,
-        role: document.getElementById('user-role').value
+        role: document.getElementById('user-role').value,
         password: document.getElementById('user-password').value
     };
     
