@@ -34,8 +34,11 @@ module.exports = sequelize.define(
       field: 'full_name'
     },
     role: {
-      allowNull: false,
       type: DataTypes.ENUM('server', 'admin', 'cashier', 'chef'),
+      allowNull: false
+    },
+    gender: {
+      type: DataTypes.ENUM('male', 'female'),
       allowNull: false
     }
   },
