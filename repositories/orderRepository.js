@@ -92,7 +92,8 @@ async function save (order) {
  */
 async function update (oldData, newData) {
   try {
-    return await oldData.update(newData);
+    await oldData.update(newData);
+    await oldData.save();
   } catch (e) {
     throw new Error(`An error has occurred while updating the order: ${e.message}`);
   }
