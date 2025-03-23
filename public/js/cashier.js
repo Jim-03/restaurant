@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     const balance = amountPaid - totalAmount;
-    balanceInput.value = balance.toFixed(2); // Display with 2 decimal places which inludes the cents
+    balanceInput.value = balance.toFixed(2); // Display with 2 decimal places which includes the cents
   });
 
   // Send order to waiter
