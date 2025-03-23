@@ -111,35 +111,62 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Send order to waiter
   sendToWaiterButton.addEventListener('click', async function () {
-    const orderId = sendToWaiterButton.dataset.orderId;
-    if (!orderId) {
-      alert('Please select an order first.');
-      return;
-    }
-
-    const requestData = {
-      orderId,
-      paymentMethod: paymentMethod.value,
-      waiter: waiter.value,
-      status: 'completed'
-    };
-
     try {
-      const response = await fetch('/api/update-order-status', {
+      const orderId = sendToWaiterButton.dataset.orderId;
+      if (!orderId) {
+        alert('Please select an order first.');
+        return;
+      }
+
+      const now = new Date()
+      const date = now.toISOString().split('T')[0]
+      const time = now.toTimeString().split(' ')[0]
+
+      // Create the payment model
+      const payment = {
+        paymentMethod: paymentMethod.value,
+        amountPaid: amountPaidInput.value,
+        amountToReturn: balanceInput.value,
+        dateOfPayment: date,
+        timePaid: time
+      }
+
+      // Send the payment to the backend
+      const response = await fetch('/api/payment', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(requestData)
-      });
+        body: JSON.stringify(payment)
+      })
+      const data = await response.json()
 
-      if (response.ok) {
-        alert('Order sent to waiter successfully!');
-      } else {
-        alert('Failed to update order status.');
+      // Notify if an error occurred
+      notify(data.status, data.message)
+
+      // Exit if an error occurs
+      if (data.status !== "created") return
+
+      // Update the order details
+      const updateResponse = await fetch(`/api/order/${orderId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({payment: data.id, waiter: Number(waiter.value)})
+      })
+      const updateData = await updateResponse.json()
+
+      // Notify the cashier
+      notify(updateData.status, updateData.message)
+
+      // Refresh the page when successful
+      if (data.status === "success") {
+        window.location.reload()
       }
+
     } catch (error) {
-      console.error('Error updating order:', error);
+      console.error(error)
     }
   });
 
