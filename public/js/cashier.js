@@ -210,6 +210,7 @@ function newPaymentMethod () {
   const paymentMethod = document.getElementById('payment-method');
   const method = document.createElement('option');
   method.textContent = 'New Method';
+  method.value = 0;
   paymentMethod.appendChild(method);
   method.addEventListener('click', async () => {
     // Ask for the new method
