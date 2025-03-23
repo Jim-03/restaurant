@@ -186,7 +186,7 @@ async function saveUserDetails(e) {
     e.preventDefault();
     const userId = document.getElementById('user-id').value;
     const userData = {
-        name: document.getElementById('user-name').value,
+        fullName: document.getElementById('user-name').value,
         username: document.getElementById('user-username').value,
         email: document.getElementById('user-email').value,
         phone: document.getElementById('user-phone').value,
