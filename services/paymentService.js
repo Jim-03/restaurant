@@ -10,7 +10,8 @@ const repo = require('../repositories/paymentRepository');
  * @param {Object} payment The payment's list
  * @returns {Promise<{
  *      status: "rejected" | "created" | "error",
- *      message: string
+ *      message: string,
+ *      id: Number
  * }>} An object that describes if the payment was added successfully or not
  */
 async function add (payment) {
@@ -19,15 +20,19 @@ async function add (payment) {
     return {
       status: 'rejected',
       message: 'Provide valid payment details!'
+      message: 'Provide valid payment details!',
+      id: 0
     };
   }
 
   try {
     // Add the payment details
-    await repo.save(payment);
+    const paymentRecord = await repo.save(payment);
     return {
       status: 'created',
       message: 'Payment successful'
+      message: 'Payment successful',
+      id: paymentRecord.id
     };
   } catch (e) {
     console.error(e);
@@ -35,6 +40,8 @@ async function add (payment) {
       status: 'error',
       message:
         'An error has occurred while adding the payment. Please try again!'
+        'An error has occurred while adding the payment. Please try again!',
+      id: 0
     };
   }
 }

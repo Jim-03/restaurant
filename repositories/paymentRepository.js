@@ -9,12 +9,12 @@ const { Op } = require('sequelize');
 /**
  * Adds a new payment to the database
  * @param {Object} payment The new payment's details
- * @returns {Promise<void>} A promise that resolves when the payment is saved
+ * @returns {Promise<paymentModel>} The newly created record
  * @throws {Error} In case of any errors
  */
 async function save (payment) {
   try {
-    await paymentModel.create(payment);
+    return await paymentModel.create(payment);
   } catch (e) {
     throw new Error(`An error occurred while saving the payment: ${e.message}`);
   }
