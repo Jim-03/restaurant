@@ -203,7 +203,7 @@ async function get (id) {
  */
 async function update (id, newData) {
   // Validate the arguments
-  if (id >= 0) {
+  if (id <= 0) {
     return {
       status: 'rejected',
       message: 'Provide a valid id!'
