@@ -16,7 +16,7 @@ const repo = require('../repositories/paymentRepository');
  */
 async function add (payment) {
   // Confirm if payment list is provided
-  if (!payment || Object.keys(payment)) {
+  if (!payment || Object.keys(payment).length === 0) {
     return {
       status: 'rejected',
       message: 'Provide valid payment details!',
