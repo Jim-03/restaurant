@@ -30,8 +30,8 @@ async function findByIncomplete () {
     return await orderModel.findAll({
       where: {
         [Op.or]: [
-          { orderStatus: 'incomplete' },
-          { orderStatus: 'processing' }
+          { orderStatus: 'unpaid' },
+          { orderStatus: 'cancelled' }
         ]
       }
     });
