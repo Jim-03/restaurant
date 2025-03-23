@@ -33,8 +33,10 @@ document.addEventListener('submit', async (event) => {
     case 'success':
       notify('success', user.message);
 
+      // Store the user's data in the session's storage
+      sessionStorage.setItem('userData', JSON.stringify(user.data));
       // Redirect based on user role
-      const role = user.data.role.name;
+      const role = user.data.role;
       role ? window.location.href = `/${role}` : window.location.href = '/';
       return;
     default:
