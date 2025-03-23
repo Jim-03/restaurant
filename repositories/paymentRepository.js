@@ -58,6 +58,22 @@ async function findByDateRange (start, end) {
     );
   }
 }
+
+/**
+ * Updates an existing payment's record
+ * @param {paymentModel} oldData
+ * @param {Object} newData
+ * @returns {Promise<void>} A promise that resolves when a payment is updated
+ */
+async function update (oldData, newData) {
+  try {
+    await oldData.update(newData);
+    await oldData.save();
+  } catch (e) {
+    throw new Error(`An error has occurred while updating the order: ${e.message}`);
+  }
+}
+
 /**
  * Removes a payment record from the database
  * @param {paymentModel} payment The payment's data
@@ -75,6 +91,7 @@ async function remove (payment) {
 }
 module.exports = {
   save,
+  update,
   findById,
   findByDateRange,
   remove
