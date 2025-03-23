@@ -19,7 +19,6 @@ async function add (payment) {
   if (!payment || Object.keys(payment)) {
     return {
       status: 'rejected',
-      message: 'Provide valid payment details!'
       message: 'Provide valid payment details!',
       id: 0
     };
@@ -30,7 +29,6 @@ async function add (payment) {
     const paymentRecord = await repo.save(payment);
     return {
       status: 'created',
-      message: 'Payment successful'
       message: 'Payment successful',
       id: paymentRecord.id
     };
@@ -39,7 +37,6 @@ async function add (payment) {
     return {
       status: 'error',
       message:
-        'An error has occurred while adding the payment. Please try again!'
         'An error has occurred while adding the payment. Please try again!',
       id: 0
     };
