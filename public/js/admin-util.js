@@ -26,8 +26,14 @@ export async function getReport() {
     }
 
 
-    // Extract the list of orders
-    let orders = data.list;
+    // Extract the list of completed orders
+    const orders = [];
+
+    data.list.forEach(order => {
+      if (order.orderStatus === "completed") {
+        orders.push(order)
+      }
+    })
 
     let totalSales = 0;
     let orderCount = orders.length;
