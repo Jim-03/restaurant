@@ -1,4 +1,4 @@
-import { notify } from './util.js';
+import {getUserData, notify} from './util.js';
 
 const ordersPreviewList = document.getElementById('ordersPreview');
 const ordersTaken = document.getElementById('ordersTaken');
@@ -12,9 +12,8 @@ document.addEventListener('DOMContentLoaded', loadOrders);
  */
 async function loadOrders () {
   // Get the user's details
-  //  const id = sessionStorage.getItem("userData").id;
-  //  const role = sessionStorage.getItem("userData").role;
-
+  const id = getUserData().id;
+  const role = getUserData().role;
   // Ensure the role is authorized
   /* if (role !== "server" || role !== "admin") {
     // Relocate to unauthorized page
