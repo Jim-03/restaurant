@@ -236,7 +236,7 @@ async function deleteUser() {
     deleteUserBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Deleting...';
     
     try {
-        const response = await fetch(`/api/users/${userId}`, {
+        const response = await fetch(`/api/user/${userId}`, {
             method: 'DELETE'
         });
         
