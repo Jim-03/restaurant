@@ -151,9 +151,18 @@ async function editUser(userId) {
     document.getElementById('user-id').value = userId;
 
     try {
-        const response = await fetch(`/api/users/${userId}`);
-        const user = await response.json();
-        document.getElementById('user-name').value = user.name || '';
+        const response = await fetch(`/api/user/${userId}`);
+        const data = await response.json();
+
+        // Check if the user was found
+        if (data.status !== 'success') {
+            notify(data.status, data.message)
+            return
+        }
+
+        // Extract the user's details
+        const user = data.data
+        document.getElementById('user-name').value = user.fullName || '';
         document.getElementById('user-username').value = user.username || '';
         document.getElementById('user-email').value = user.email || '';
         document.getElementById('user-phone').value = user.phone || '';
