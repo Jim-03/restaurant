@@ -23,7 +23,7 @@ async function loadOrders () {
 
   try {
     // Fetch the list of orders
-    const response = await fetch('/api/order/server/1');
+    const response = await fetch(`/api/order/server/${id}`);
     const data = await response.json();
 
     // Check if the orders were successfully retrieved
