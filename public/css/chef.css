@@ -165,3 +165,69 @@ main {
 footer h2 {
   padding: 10px;
 }
+/*this helps align on smaller screens like a phone*/
+@media (max-width: 720px) {
+  body {
+    overflow-x: hidden;
+    padding: 10px;
+  }
+
+  header h1 {
+    font-size: 22px;
+    padding: 15px;
+  }
+
+  .section-header {
+    font-size: 24px;
+    margin: 30px;
+  }
+
+  .chef-operations {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .crud {
+    width: 90%;
+    height: auto;
+    padding: 15px;
+  }
+
+  .background form {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .background form input,
+  .background form select {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .background form button {
+    width: 100%;
+    font-size: 16px;
+    padding: 10px;
+  }
+
+  .searchDiv {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .searchDiv input {
+    width: 100%;
+  }
+
+  .fa-magnifying-glass {
+    width: 100%;
+    height: 40px;
+    margin-top: 5px;
+  }
+
+  footer h2 {
+    font-size: 18px;
+  }
+}
