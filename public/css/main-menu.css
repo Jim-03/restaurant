@@ -74,6 +74,7 @@ main {
   padding-bottom: 20px;
   flex:1;
   min-height: 70vh;
+  height: auto;
 }
 
 #displaySection {
@@ -85,10 +86,11 @@ main {
   padding-top: 30px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 30px;
+  justify-content: space-evenly;
+  gap: 15px;
   overflow-y: auto;
   max-height: calc(100vh-60px);
+  padding:20px;
 }
 
 #cartSection {
@@ -106,9 +108,9 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 200px;
-  height: 150px;
-  padding: 10px;
+  width: 180px;
+  height: 140px;
+  padding: 5px;
   font-size: 14px;
 }
 
