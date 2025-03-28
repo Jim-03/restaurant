@@ -29,7 +29,7 @@ header h1 {
   justify-content: space-evenly;
   height: 50px;
   padding: 5px;
-  margin-top: 10p;
+  margin-top: 10px;
   background-color: white;
 }
 
@@ -52,7 +52,7 @@ header h1 {
 #categories button:hover {
   background-color: lightblue;
   color: black;
-  transform: translateY(-2px);
+  transform: matrix(0,1,1,0,0,0);
   box-shadow: 1px 1px 1px black;
 }
 
@@ -62,11 +62,11 @@ main {
   margin-top: 10px;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
 }
 
 #displaySection {
-  width: 73%;
+  width: 70%;
   background-color: white;
   border-radius: 10px;
   height: 95%;
@@ -98,7 +98,7 @@ main {
 }
 
 .foodItem:hover {
-  transform: translateY(-5px);
+  transform: skew(-10deg, -10deg);
   box-shadow: 5px 5px 5px black;
 }
 .foodName {
@@ -275,4 +275,9 @@ footer a {
     padding: 15px;
     text-align: center;
   }
+}
+
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
 }
