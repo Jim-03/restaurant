@@ -4,7 +4,6 @@ html,body{
   padding: 0;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
 }
 * {
   font-family: Arial, Helvetica, sans-serif;
@@ -66,11 +65,8 @@ header h1 {
 
 /* Main Section */
 main {
-  height: calc(100vh - 120px);
-  margin-top: 10px;
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
   overflow: hidden;
   flex-grow: 1;
 }
@@ -93,10 +89,8 @@ main {
 #cartSection {
   width: 25%;
   background-color: white;
-  border-radius: 10px;
-  height: auto;
   overflow-y: auto;
-  max-height: 400px;
+  max-height: 80vh;
   padding: 10px;
 }
 
@@ -213,9 +207,7 @@ footer {
   bottom: 0;
   height: 50px;
   background-color: rgb(44, 62, 80);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  text-align: center;
   color: white;
   padding: 10px 0;
   width: 100%
