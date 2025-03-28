@@ -15,6 +15,8 @@ body {
   background-color: rgb(243, 243, 243);
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 header {
@@ -206,16 +208,23 @@ footer {
   position: relative;
   bottom: 0;
   height: 50px;
+  z-index: 10;
   background-color: rgb(44, 62, 80);
   text-align: center;
   color: white;
-  padding: 10px 0;
+  padding: 15px 0;
   width: 100%
 }
 
 footer a {
   color: white;
   margin-bottom: 30px;
+}
+
+footer ::after{
+  content: "";
+  display: block;
+  height: 0;
 }
 /*the following are to handle a smaller screen size like a phone*/
 @media (max-width: 720px) {
