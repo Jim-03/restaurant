@@ -2,7 +2,7 @@ html, body{
   height: 100vh;
   margin:0;
   padding:0;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 * {
@@ -65,12 +65,12 @@ header h1 {
 
 /* Main Section */
 main {
-  height: calc(100vh - 100px);
+  height: calc(100vh - 120px);
   margin-top: 10px;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  overflow: hidden;
+  overflow-y: auto;
 }
 
 #displaySection {
@@ -200,6 +200,9 @@ main {
   background-color: red;
 }
 footer {
+  position: relative;
+  bottom: 0;
+  height: 50px;
   background-color: rgb(44, 62, 80);
   display: flex;
   flex-direction: column;
