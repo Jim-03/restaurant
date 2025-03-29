@@ -94,3 +94,51 @@ export function displayFood (foodList) {
 export function getUserData () {
   return JSON.parse(sessionStorage.getItem('userData'));
 }
+
+/**
+ * Retrieves a list of ordered meals in an order
+ * @param {Number} id The order's primary key
+ * @returns {Promise<Array|null>} The list of ordered food or null
+ */
+export async function getMealsInOrder (id) {
+  try {
+    const response = await fetch(`/api/orderFood/${id}`);
+    const data = await response.json();
+    return data.list;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
+/**
+ * Retrieves a food item's details
+ * @param {Number} id The food items primary key
+ * @returns {Promise<Object|null>} The food item's data
+ */
+export async function getFoodDetails (id) {
+  try {
+    const response = await fetch(`/api/food/${id}`);
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
+/**
+ * Retrieves a user's details
+ * @param {Number} id The user's primary key
+ * @returns {Promise<Object|null>} The user's details or null
+ */
+export async function getUserDetails (id) {
+  try {
+    const response = await fetch(`/api/user/${id}`);
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
