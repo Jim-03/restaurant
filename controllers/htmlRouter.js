@@ -43,4 +43,11 @@ htmlRoute.get("/server", (req, res) => {
 htmlRoute.get("/admin", (req, res) => {
   res.sendFile(template("admin.html"))
 })
+
+/**
+ * The report route
+ */
+htmlRoute.get("/report", (req, res) => {
+  res.sendFile(template("report.html"))
+})
 module.exports = htmlRoute;
