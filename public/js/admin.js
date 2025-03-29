@@ -18,39 +18,74 @@ export function getDateRange () {
   const today = new Date();
   let start, end;
   switch (datePreset.value) {
-    case 'today': start = end = today; break;
-    case 'week': start = new Date(today); start.setDate(today.getDate() - 7); end = today; break;
-    case 'month': start = new Date(today); start.setMonth(today.getMonth() - 1); end = today; break;
-    case 'custom': start = startDate.value ? new Date(startDate.value) : null; end = endDate.value ? new Date(endDate.value) : null; break;
+    case 'today':
+      start = new Date(today);
+      end = new Date(today);
+      break;
+    case 'week':
+      start = new Date(today);
+      start.setDate(today.getDate() - 7);
+      end = today;
+      break;
+    case 'month':
+      start = new Date(today);
+      start.setMonth(today.getMonth() - 1);
+      end = today;
+      break;
+    case 'custom':
+      start = startDate.value ? new Date(startDate.value) : null;
+      end = endDate.value ? new Date(endDate.value) : null;
+      break;
   }
   return { start, end };
 }
 
 datePreset.addEventListener('change', function () {
   customDate.style.display = this.value === 'custom' ? 'flex' : 'none';
-  if (this.value !== 'custom') { startDate.value = ''; endDate.value = ''; fetchReportData(); }
+  if (this.value !== 'custom') {
+    startDate.value = '';
+    endDate.value = '';
+    fetchReportData();
+  }
 });
 
-[startDate, endDate].forEach(input => {
+[startDate, endDate].forEach((input) => {
   input.addEventListener('change', () => {
-    if (datePreset.value === 'custom' && startDate.value && endDate.value) fetchReportData();
+    if (datePreset.value === 'custom' && startDate.value && endDate.value) { fetchReportData(); }
   });
 });
 
 function showLoading () {
-  const metrics = ['total-sales', 'avg-order-value', 'top-selling-item', 'orders-processed', 'total-items', 'low-stock-items', 'most-used-item', 'stock-value'];
-  metrics.forEach(metric => document.getElementById(metric).innerHTML = '<i class="fas fa-spinner fa-spin"></i>');
+  const metrics = [
+    'total-sales',
+    'avg-order-value',
+    'top-selling-item',
+    'orders-processed',
+    'total-items',
+    'low-stock-items',
+    'most-used-item',
+    'stock-value'
+  ];
+  metrics.forEach(
+    (metric) =>
+      (document.getElementById(metric).innerHTML =
+        '<i class="fas fa-spinner fa-spin"></i>')
+  );
 }
 
 function updateReportData (data) {
   if (!data) return;
   document.getElementById('total-sales').textContent = data.totalSales || '';
   document.getElementById('avg-order-value').textContent = data.avgValue || '';
-  document.getElementById('top-selling-item').textContent = data.topSellingItem || '';
-  document.getElementById('orders-processed').textContent = data.ordersProcessed || '';
+  document.getElementById('top-selling-item').textContent =
+    data.topSellingItem || '';
+  document.getElementById('orders-processed').textContent =
+    data.ordersProcessed || '';
   document.getElementById('total-items').textContent = data.totalItems || '';
-  document.getElementById('low-stock-items').textContent = data.lowStockItems || '';
-  document.getElementById('most-used-item').textContent = data.mostUsedItem || '';
+  document.getElementById('low-stock-items').textContent =
+    data.lowStockItems || '';
+  document.getElementById('most-used-item').textContent =
+    data.mostUsedItem || '';
   document.getElementById('stock-value').textContent = data.stockValue || '';
 }
 
@@ -63,38 +98,23 @@ async function fetchReportData () {
   }
 }
 
-document.querySelectorAll('.export-btn').forEach(btn => {
-  btn.addEventListener('click', async function () {
-    const format = this.textContent.includes('PDF') ? 'pdf' : 'csv';
-    showLoading();
-    try {
-      const { start, end } = getDateRange();
-      await fetch(`/api/export/${format}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ start, end })
-      });
-      console.log(`Successfully exported to ${format.toUpperCase()}`);
-      await fetchReportData();
-    } catch (error) {
-      console.error('Export failed:', error);
-    }
-  });
-});
-
 function showSection (sectionId) {
-  sections.forEach(section => {
-    section.style.display = section.id === `${sectionId}-section` ? 'block' : 'none';
+  sections.forEach((section) => {
+    section.style.display =
+      section.id === `${sectionId}-section` ? 'block' : 'none';
   });
-  sidebarLinks.forEach(link => {
-    link.classList.toggle('active', link.getAttribute('href') === `#${sectionId}`);
+  sidebarLinks.forEach((link) => {
+    link.classList.toggle(
+      'active',
+      link.getAttribute('href') === `#${sectionId}`
+    );
   });
 
   if (sectionId === 'user-management') loadUsers();
   else if (sectionId === 'overview') fetchReportData();
 }
 
-sidebarLinks.forEach(link => {
+sidebarLinks.forEach((link) => {
   link.addEventListener('click', function (e) {
     e.preventDefault();
     const sectionId = this.getAttribute('href').substring(1);
@@ -121,7 +141,7 @@ async function loadUsers () {
     }
 
     userTableBody.innerHTML = '';
-    data.list.forEach(user => {
+    data.list.forEach((user) => {
       const tr = document.createElement('tr');
       tr.innerHTML = `
                 <td>${user.fullName}</td>
@@ -135,7 +155,7 @@ async function loadUsers () {
       userTableBody.appendChild(tr);
     });
 
-    document.querySelectorAll('.edit-btn').forEach(btn => {
+    document.querySelectorAll('.edit-btn').forEach((btn) => {
       btn.addEventListener('click', () => editUser(btn.dataset.id));
     });
   } catch (error) {
@@ -212,7 +232,11 @@ async function saveUserDetails (e) {
 
     saveBtn.innerHTML = '<i class="fas fa-save"></i> Save Changes';
     saveBtn.disabled = false;
-    showFeedback(feedback, `User ${userId ? 'updated' : 'created'} successfully!`, 'success');
+    showFeedback(
+      feedback,
+      `User ${userId ? 'updated' : 'created'} successfully!`,
+      'success'
+    );
 
     if (!userId) {
       userForm.reset();
@@ -222,7 +246,11 @@ async function saveUserDetails (e) {
     console.error(`Error ${userId ? 'updating' : 'creating'} user:`, error);
     saveBtn.innerHTML = '<i class="fas fa-save"></i> Save Changes';
     saveBtn.disabled = false;
-    showFeedback(feedback, `Failed to ${userId ? 'update' : 'create'} user`, 'error');
+    showFeedback(
+      feedback,
+      `Failed to ${userId ? 'update' : 'create'} user`,
+      'error'
+    );
   }
 }
 
@@ -233,7 +261,8 @@ async function deleteUser () {
   if (!confirm('Are you sure you want to delete this user?')) return;
 
   deleteUserBtn.disabled = true;
-  deleteUserBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Deleting...';
+  deleteUserBtn.innerHTML =
+    '<i class="fas fa-spinner fa-spin"></i> Deleting...';
 
   try {
     const response = await fetch(`/api/user/${userId}`, {
@@ -262,3 +291,8 @@ userForm.addEventListener('submit', saveUserDetails);
 
 showSection('overview');
 fetchReportData();
+
+document.getElementById('export').addEventListener('click', () => {
+  sessionStorage.setItem('dates', JSON.stringify(getDateRange()));
+  window.location.href = '/report';
+});
