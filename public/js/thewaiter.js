@@ -185,6 +185,17 @@ async function loadTakenOrders (orders) {
   <strong>${formattedDate}</strong> - Table <strong>${order.tableNumber}</strong>: 
   ${itemList} <br> 
 `;
+      // Check if the order's status is complete
+      // If not add button
+      if (order.orderStatus !== 'completed') {
+        const completeButton = document.createElement('button');
+        completeButton.textContent = 'Mark as complete';
+        completeButton.style.backgroundColor = 'green';
+        completeButton.addEventListener('click', async () => {
+          await updateOrder(order.id, 'completed');
+        });
+        listItem.appendChild(completeButton);
+      }
 
       ordersTaken.appendChild(listItem);
     }
