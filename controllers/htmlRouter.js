@@ -26,28 +26,28 @@ htmlRoute.get('/chef', (req, res) => {
 /**
  * The cashier route
  */
-htmlRoute.get("/cashier", (req, res) => {
-  res.sendFile(template('cashier.html'))
-})
+htmlRoute.get('/cashier', (req, res) => {
+  res.sendFile(template('cashier.html'));
+});
 
 /**
  * The waiter/waitress route
  */
-htmlRoute.get("/server", (req, res) => {
-  res.sendFile(template("thewaiter.html"))
-})
+htmlRoute.get('/server', (req, res) => {
+  res.sendFile(template('thewaiter.html'));
+});
 
 /**
  * The admin route
  */
-htmlRoute.get("/admin", (req, res) => {
-  res.sendFile(template("admin.html"))
-})
+htmlRoute.get('/admin', (req, res) => {
+  res.sendFile(template('admin.html'));
+});
 
 /**
  * The report route
  */
-htmlRoute.get("/report", (req, res) => {
-  res.sendFile(template("report.html"))
-})
+htmlRoute.get('/report', (req, res) => {
+  res.sendFile(template('report.html'));
+});
 module.exports = htmlRoute;
