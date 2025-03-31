@@ -24,18 +24,19 @@ export function getDateRange () {
       break;
     case 'week':
       start = new Date(today);
-      start.setDate(today.getDate() - 7);
+      start.setDate(today.getDate() - 6);
       end = today;
       break;
     case 'month':
-      start = new Date(today);
-      start.setMonth(today.getMonth() - 1);
+      start = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
       end = today;
       break;
     case 'custom':
-      start = startDate.value ? new Date(startDate.value) : null;
-      end = endDate.value ? new Date(endDate.value) : null;
+      start = startDate ? new Date(startDate.value) : null;
+      end = endDate ? new Date(endDate.value) : null;
       break;
+    default:
+      throw new Error('Invalid date preset');
   }
   return { start, end };
 }
