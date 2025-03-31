@@ -25,15 +25,15 @@ foodAPI.get('/api/food/category/:id', (req, res) => {
 });
 foodAPI.get('/api/food/:id', (req, res) => {
   if (isNaN(Number(req.params.id))) {
-  getFoodItemByName(req.params.id)
-    .then(response => {
-      res.status(getStatusCode(response.status)).json(response);
-    });
+    getFoodItemByName(req.params.id)
+      .then(response => {
+        res.status(getStatusCode(response.status)).json(response);
+      });
   } else {
     getById(Number(req.params.id))
-    .then(response => {
-      res.status(getStatusCode(response.status)).json(response)
-    })
+      .then(response => {
+        res.status(getStatusCode(response.status)).json(response);
+      });
   }
 });
 foodAPI.post('/api/food', (req, res) => {
