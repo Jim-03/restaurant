@@ -7,6 +7,18 @@ const foodItem = require('../models/food_model');
 const { Op } = require('sequelize');
 
 /**
+ * Retrieves a list of all food items
+ * @returns {Promise<foodItem[]>} A list of all food items
+ */
+async function findAll () {
+  try {
+    return await foodItem.findAll();
+  } catch (error) {
+    throw new Error(`An error has occurred while fetching all the food items: ${error.message}`);
+  }
+}
+
+/**
  * Retrieves a food item's data by its name
  * @param {string} name The name of the food item
  * @returns {Promise<foodItem | null>} The food item's data or null
@@ -111,4 +123,4 @@ async function remove (food) {
     throw new Error(`An error occurred while deleting the food item: ${e.message}`);
   }
 }
-module.exports = { findByName, save, findAllByName, findByCategory, update, findById, remove };
+module.exports = { findAll, findByName, save, findAllByName, findByCategory, update, findById, remove };

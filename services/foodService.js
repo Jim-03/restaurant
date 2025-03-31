@@ -2,7 +2,7 @@
  * @module foodService
  * @description A food service module that handles the business logic on the food model
  */
-const { findByName, save, findAllByName, findByCategory, update, findById, remove } = require('../repositories/foodRepository');
+const { findAll, findByName, save, findAllByName, findByCategory, update, findById, remove } = require('../repositories/foodRepository');
 
 /**
  * Handles the business logic while adding a food item to the database
@@ -38,6 +38,43 @@ async function addFood (food) {
     return {
       status: 'error',
       message: 'An error has occurred in our end. Please try again later!'
+    };
+  }
+}
+
+/**
+ * Handles the retrieval of all food items
+ * @returns {Promise<{
+ *    status: string,
+ *    message: string,
+ *    list: Array | null
+ * }>} An object containing the list of food items
+ */
+async function getAll () {
+  try {
+    // Fetch a list of all food items
+    const list = await findAll();
+
+    // Check if food items exist
+    if (!list) {
+      return {
+        status: 'not_found',
+        message: 'No food items have been added',
+        list: null
+      };
+    }
+
+    return {
+      status: 'success',
+      message: 'Food list found',
+      list: Array.isArray(list) ? list : [list]
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 'error',
+      message: 'An error has occurred. Please try again!',
+      list: null
     };
   }
 }
@@ -325,6 +362,7 @@ async function deleteFood (id) {
 
 module.exports = {
   addFood,
+  getAll,
   getFoodList,
   getById,
   getByCategory,

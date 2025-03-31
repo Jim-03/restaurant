@@ -1,5 +1,5 @@
 const express = require('express');
-const { getFoodItemByName, getById, getFoodList, getByCategory, addFood, updateItem, deleteFood } = require('../services/foodService');
+const { getAll, getFoodItemByName, getById, getFoodList, getByCategory, addFood, updateItem, deleteFood } = require('../services/foodService');
 const foodAPI = express.Router();
 const getStatusCode = require('./getStatusCode');
 
