@@ -83,11 +83,10 @@ function updateReportData (data) {
   document.getElementById('orders-processed').textContent =
     data.ordersProcessed || '';
   document.getElementById('total-items').textContent = data.totalItems || '';
-  document.getElementById('low-stock-items').textContent =
-    data.lowStockItems || '';
+  document.getElementById('low-stock-items').textContent = data.lowStockItems;
   document.getElementById('most-used-item').textContent =
     data.mostUsedItem || '';
-  document.getElementById('stock-value').textContent = data.stockValue || '';
+  document.getElementById('stock-value').textContent = `${data.stockValue} Ksh` || '';
 }
 
 async function fetchReportData () {
