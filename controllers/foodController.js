@@ -10,6 +10,13 @@ foodAPI.get('/api/food/list/:name', (req, res) => {
     });
 });
 
+foodAPI.get('/api/food', (req, res) => {
+  getAll()
+    .then(response => {
+      res.status(getStatusCode(response.status)).json(response);
+    });
+});
+
 foodAPI.get('/api/food/category/:id', (req, res) => {
   getByCategory(Number(req.params.id))
     .then(response => {
