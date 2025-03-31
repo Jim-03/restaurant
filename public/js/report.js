@@ -144,7 +144,7 @@ async function displayOrders (orders) {
 
     // Add the total revenue tag
     const totalRevenue = document.createElement('p');
-    totalRevenue.textContent = `Period Total: ${total}`;
+    totalRevenue.textContent = `Period Total: ${total} Ksh`;
     orderSection.appendChild(totalRevenue);
   } catch (error) {
     notify('rejected', 'An unexpected error has occurred!');
