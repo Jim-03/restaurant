@@ -277,8 +277,8 @@ async function displayItems (items) {
     return;
   }
 
-  // Create an ordered list element
-  const ol = document.createElement('ol');
+  // Create an unordered list element
+  const ul = document.createElement('ul');
 
   // Iterate through each item and add it to the UI
   items.forEach(item => {
@@ -287,9 +287,9 @@ async function displayItems (items) {
     li.textContent = `${item.stock} ${item.name} remaining!`;
 
     // Add the list to the ordered list
-    ol.appendChild(li);
+    ul.appendChild(li);
   });
 
   // Add the ordered list to the stock section
-  stockSection.appendChild(ol);
+  stockSection.appendChild(ul);
 }
