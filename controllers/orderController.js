@@ -18,10 +18,10 @@ orderApi.get('/api/order/unfinished', (req, res) => {
 
 orderApi.post('/api/order/date', (req, res) => {
   service.getByDateRange(req.body)
-  .then(response => {
-    res.status(statusCode(response.status)).json(response)
-  })
-})
+    .then(response => {
+      res.status(statusCode(response.status)).json(response);
+    });
+});
 orderApi.get('/api/order/server/:id', (req, res) => {
   service.getByServer(Number(req.params.id))
     .then(response => {
