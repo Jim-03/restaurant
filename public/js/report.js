@@ -7,6 +7,7 @@ import {
 
 const orderSection = document.getElementById('orderSection');
 const waiterSection = document.getElementById('waiterSection');
+const stockSection = document.getElementById('outOfStock');
 
 document.addEventListener('DOMContentLoaded', async () => {
   // Fetch the list of orders
@@ -24,6 +25,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Display waiters
   await displayWaiters(waiters);
+
+  // Fetch the list of items that are out of stock
+  const items = await getFoodItems();
+  if (!items) return;
+  // Display the food items
+  await displayItems(items);
 
   // Create a print button
   const print = document.createElement('button');
@@ -229,4 +236,60 @@ async function displayWaiters (waiters) {
   });
 
   waiterSection.appendChild(ol);
+}
+
+/**
+ * Retrieves a list of food items that are nearly out of stock
+ * @returns {Promise<Array|null>} The list of food items or null
+ */
+async function getFoodItems () {
+  try {
+    // Fetch the list of all food items
+    const response = await fetch('/api/food');
+    const data = await response.json();
+
+    // Check if response is okay
+    if (data.status !== 'success') {
+      notify(data.status, data.message);
+      return null;
+    }
+
+    // Extract the list of out of stock items
+    return data.list.filter(item => item.stock <= 5);
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
+/**
+ * Displays a list of items to the UI
+ * @param {Array}items
+ * @returns {Promise<void>} A promise that resolves when the items are displayed
+ */
+async function displayItems (items) {
+  // Check if there's any food item present
+  if (items.length === 0) {
+    const p = document.createElement('p');
+    p.textContent = 'No items are nearly out of stock!';
+    p.style.color = 'red';
+    stockSection.appendChild(p);
+    return;
+  }
+
+  // Create an ordered list element
+  const ol = document.createElement('ol');
+
+  // Iterate through each item and add it to the UI
+  items.forEach(item => {
+    // Create a list element
+    const li = document.createElement('li');
+    li.textContent = `${item.stock} ${item.name} remaining!`;
+
+    // Add the list to the ordered list
+    ol.appendChild(li);
+  });
+
+  // Add the ordered list to the stock section
+  stockSection.appendChild(ol);
 }
