@@ -68,6 +68,14 @@ export function displayFood (foodList) {
         totalPrice: foodItem.price
       };
 
+      // Check if food item already exists in the cart
+      const existingItem = CART.find((item) => item.foodId === foodItem.id);
+
+      if (existingItem) {
+        notify('rejected', 'The food item is already added');
+        return;
+      }
+
       // Add the food item to the cart
       CART.push(orderedItem);
       reloadCart();
