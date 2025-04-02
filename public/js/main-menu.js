@@ -73,3 +73,39 @@ async function loadCategories () {
     alert('An error has occurred. Please try again!');
   }
 }
+
+document.getElementById('searchButton').addEventListener('click', async (event) => {
+  // Prevent default submit event
+  event.preventDefault();
+
+  // Obtain the search bar's input value
+  const itemToSearch = document.getElementById('searchInput').value;
+
+  if (!itemToSearch || itemToSearch.length === 0) return;
+
+  // Clear out the display section
+  document.getElementById('displaySection').innerHTML = '';
+
+  try {
+    // Send the get request
+    const response = await fetch(`/api/food/list/${itemToSearch}`);
+    const data = await response.json();
+
+    // Check if the response is okay
+    if (data.status !== 'success') {
+      // Notify via the display
+
+      const p = document.createElement('p');
+      p.textContent = `${data.message}`;
+
+      document.getElementById('displaySection').appendChild(p);
+      return;
+    }
+
+    // Display the list
+    displayFood(data.list);
+  } catch (e) {
+    alert('An error has occurred. Please try again!');
+    console.error(e);
+  }
+});
