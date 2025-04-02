@@ -1,7 +1,6 @@
 import { notify } from './util.js';
 
 document.addEventListener('DOMContentLoaded', function () {
-  newPaymentMethod();
   getPaymentMethods();
   getWaiterList();
   const orderDetails = document.getElementById('order-details');
