@@ -209,6 +209,13 @@ async function getPaymentMethods () {
 document.getElementById('methodButton').addEventListener('click', async () => {
   // Ask for the new method
   const name = prompt("Enter the new payment method's name?");
+
+  // Check if the name is provided
+  if (!name || name.length === 0) {
+    alert('Provide the name of the payment method!');
+    return;
+  }
+
   const description = prompt('Describe the new payment method. (Optional)');
 
   // Check if the details are provided
