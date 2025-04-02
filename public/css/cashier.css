@@ -132,6 +132,17 @@ button:hover {
     background-color: #2980b9;
 }
 
+#methodButton {
+    background-color: green;
+    width: 30%;
+    margin: 20px auto;
+}
+
+#methodButton:hover {
+    background-color: greenyellow;
+    color: black;
+}
+
 #send-to-waiter {
     background-color: #050861;
 }
