@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (updateData.status === 'success') {
         setTimeout(() => {
           window.location.reload();
-        }, 3000)
+        }, 3000);
       }
     } catch (error) {
       console.error(error);
@@ -190,7 +190,7 @@ async function getPaymentMethods () {
 
     const paymentMethod = document.getElementById('payment-method');
     // Clear out the options
-    paymentMethod.innerHTML = ``
+    paymentMethod.innerHTML = '';
 
     // Populate the payment method UI
     data.list.forEach(method => {

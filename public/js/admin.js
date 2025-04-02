@@ -234,11 +234,11 @@ async function saveUserDetails (e) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(userData)
     });
-    const data = await response.json()
+    const data = await response.json();
 
     // Check if user was added successfully
-    if (data.status !== "created") {
-      notify(data.status, data.message)
+    if (data.status !== 'created') {
+      notify(data.status, data.message);
       throw new Error(`${userId ? 'Update' : 'Create'} failed`);
     }
 
