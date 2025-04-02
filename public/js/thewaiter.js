@@ -39,7 +39,7 @@ async function loadOrders () {
     const takenOrders = [];
 
     orders.forEach((order) => {
-      if (order.orderStatus === 'unpaid') {
+      if (order.orderStatus === 'waited') {
         assignedOrders.push(order);
       } else if (order.orderStatus !== 'cancelled') {
         takenOrders.push(order);
