@@ -14,22 +14,29 @@ const userFormTitle = document.getElementById('user-form-title');
 const sidebarLinks = document.querySelectorAll('.sidebar a');
 const sections = document.querySelectorAll('.report-section');
 
+/**
+ * Retrieves the selected date range
+ * @returns {{start: Date, end: Date}} An object with the date ranges
+ */
 export function getDateRange () {
   const today = new Date();
   let start, end;
+
   switch (datePreset.value) {
     case 'today':
-      start = new Date(today);
-      end = new Date(today);
+      start = new Date(today.setHours(0, 0, 0, 0));
+      end = new Date(today.setHours(23, 59, 59, 999));
       break;
     case 'week':
       start = new Date(today);
       start.setDate(today.getDate() - 6);
-      end = today;
+      start.setHours(0, 0, 0, 0);
+      end = new Date(today.setHours(23, 59, 59, 999));
       break;
     case 'month':
-      start = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
-      end = today;
+      start = new Date(today.getFullYear(), today.getMonth(), 1);
+      start.setHours(0, 0, 0, 0);
+      end = new Date(today.setHours(23, 59, 59, 999));
       break;
     case 'custom':
       start = startDate ? new Date(startDate.value) : null;
