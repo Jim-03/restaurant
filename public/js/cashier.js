@@ -187,6 +187,8 @@ async function getPaymentMethods () {
     if (data.status !== 'success') return;
 
     const paymentMethod = document.getElementById('payment-method');
+    // Clear out the options
+    paymentMethod.innerHTML = ``
 
     // Populate the payment method UI
     data.list.forEach(method => {
