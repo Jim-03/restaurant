@@ -10,6 +10,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="shortcut icon" href="images/menu.png" type="image/x-icon" />
     <link rel="stylesheet" href="css/main-menu.css" />
     <link rel="stylesheet" href="css/notification.css">
@@ -22,6 +23,10 @@
       </nav>
     </header>
     <p id="notification"></p>
+    <form action="/search" method="GET" class="search-bar">
+      <input type="text" name="query" placeholder="Search for you meal...">
+      <button type="submit"><i class="fas fa-search"></i></button>
+    </form>
     <main>
       <section id="displaySection"></section>
       <section id="cartSection"></section>
