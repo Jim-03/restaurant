@@ -160,8 +160,10 @@ document.addEventListener('DOMContentLoaded', function () {
       notify(updateData.status, updateData.message);
 
       // Refresh the page when successful
-      if (data.status === 'success') {
-        window.location.reload();
+      if (updateData.status === 'success') {
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000)
       }
     } catch (error) {
       console.error(error);
