@@ -5,7 +5,7 @@ const display = document.getElementById('displaySection');
 document.addEventListener('DOMContentLoaded', async () => {
   try {
     loadCategories();
-    // Fetch the list of food items from the special
+    // Fetch the list of food items from the first category
     const backendResponse = await fetch('/api/food/category/1');
     const data = await backendResponse.json();
 
