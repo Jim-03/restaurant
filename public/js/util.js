@@ -78,6 +78,7 @@ export function displayFood (foodList) {
 
       // Add the food item to the cart
       CART.push(orderedItem);
+      notify('success', 'Food added successfully');
       reloadCart();
     });
     foodSection.appendChild(foodName);
