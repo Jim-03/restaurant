@@ -239,7 +239,7 @@ async function saveUserDetails (e) {
     // Check if user was added successfully
     if (data.status !== "created") {
       notify(data.status, data.message)
-      return
+      throw new Error(`${userId ? 'Update' : 'Create'} failed`);
     }
 
     saveBtn.innerHTML = '<i class="fas fa-save"></i> Save Changes';
