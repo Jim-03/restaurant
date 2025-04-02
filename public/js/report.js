@@ -124,7 +124,7 @@ async function displayOrders (orders) {
       div.appendChild(ul);
       const totalPrice = document.createElement('p');
       totalPrice.classList = 'total-order-price';
-      totalPrice.innerHTML = `${order.totalPrice} Ksh`;
+      totalPrice.innerHTML = `${order.totalPrice.toFixed(2)} Ksh`;
       total += order.totalPrice;
 
       // Get the waiter's details
@@ -144,7 +144,7 @@ async function displayOrders (orders) {
 
     // Add the total revenue tag
     const totalRevenue = document.createElement('p');
-    totalRevenue.textContent = `Period Total: ${total} Ksh`;
+    totalRevenue.textContent = `Period Total: ${total.toFixed(2)} Ksh`;
     orderSection.appendChild(totalRevenue);
   } catch (error) {
     notify('rejected', 'An unexpected error has occurred!');
