@@ -16,7 +16,7 @@ module.exports = sequelize.define(
     },
     description: {
       type: DataTypes.STRING(150),
-      allowNull: false
+      allowNull: true
     }
   },
   {
