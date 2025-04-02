@@ -204,38 +204,40 @@ async function getPaymentMethods () {
  * Adds a new option in the payment methods dropdown
  * On clicking the option, it allows one to add a new payment method
  */
-function newPaymentMethod () {
-  const paymentMethod = document.getElementById('payment-method');
-  const method = document.createElement('option');
-  method.textContent = 'New Method';
-  method.value = 0;
-  paymentMethod.appendChild(method);
-  method.addEventListener('click', async () => {
-    // Ask for the new method
-    const name = prompt("Enter the new payment method's name?");
-    const description = prompt('Describe the new payment method');
+document.getElementById('methodButton').addEventListener('click', async () => {
+  // Ask for the new method
+  const name = prompt("Enter the new payment method's name?");
+  const description = prompt('Describe the new payment method. (Optional)');
 
-    try {
-      // Send the method to the backend for storage
-      const response = await fetch('/api/paymentMethod', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ name, description })
-      });
-      const data = await response.json();
+  // Check if the details are provided
+  if (!name) {
+    alert('Provide the name of the payment method!');
+    return;
+  }
 
-      // Notify if method was added successfully
-      notify(data.status, data.message);
+  try {
+    // Send the method to the backend for storage
+    const response = await fetch('/api/paymentMethod', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ name, description })
+    });
+    const data = await response.json();
 
-      // Reload the page if successful
-      if (data.status === 'created') window.location.reload();
-    } catch (error) {
-      console.error(error);
-    }
-  });
-}
+    // Notify if method was added successfully
+    notify(data.status, data.message);
+
+    // Reload the page if successful
+    if (data.status === 'created') window.location.reload();
+  } catch (error) {
+    console.error(error);
+  }
+
+  // Reload the payment options
+  await getPaymentMethods();
+});
 
 /**
  * Sends a GET request to the backend to retrieve a list of waiters
