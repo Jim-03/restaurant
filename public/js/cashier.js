@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function () {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ payment: data.id, waiter: Number(waiter.value), orderStatus: 'unpaid' })
+        body: JSON.stringify({ payment: data.id, waiter: Number(waiter.value), orderStatus: 'waited' })
       });
       const updateData = await updateResponse.json();
 

@@ -37,7 +37,7 @@ module.exports = sequelize.define(
       allowNull: true
     },
     orderStatus: {
-      type: DataTypes.ENUM('cancelled', 'processing', 'completed', 'unpaid'),
+      type: DataTypes.ENUM('cancelled', 'waited' ,'processing', 'completed', 'unpaid'),
       defaultValue: 'processing',
       allowNull: false,
       field: 'order_status'

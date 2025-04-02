@@ -149,12 +149,3 @@ footer button {
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-
-/*these are the styles for the final button which saves the order plus the waiter name*/
-#saveOrderButton {
-    background-color: #007bff;
-}
-
-#saveOrderButton:hover {
-    background-color: #0056b3;
-}
