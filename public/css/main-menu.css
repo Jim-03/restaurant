@@ -244,12 +244,14 @@ footer ::after{
 
 /*input fields styling*/
 .seearch-bar input{
-  border: none;
+  border: 1px solid #ccc;
   outline: none;
   padding:10px;
   font-size: 16px;
   border-radius: 25px;
   flex:1;
+  width: 300px;
+  height:40px;
 }
 
 /* search bar button */
