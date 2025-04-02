@@ -95,6 +95,7 @@ async function save (user) {
 async function update (oldData, newData) {
   try {
     await oldData.update(newData);
+    oldData.save()
   } catch (e) {
     throw new Error(`An error has occurred while updating the account: ${e.message}`);
   }

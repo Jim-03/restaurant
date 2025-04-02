@@ -257,7 +257,7 @@ async function update (id, newData) {
 
     // Hash the new password
     if (newData.password) {
-      newData.password = bcrypt.hash(newData.password, bcrypt.genSalt(10));
+      newData.password = await bcrypt.hash(newData.password, await bcrypt.genSalt(10));
     }
 
     // Update the data
