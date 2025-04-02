@@ -234,8 +234,13 @@ async function saveUserDetails (e) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(userData)
     });
+    const data = await response.json()
 
-    if (!response.ok) throw new Error(`${userId ? 'Update' : 'Create'} failed`);
+    // Check if user was added successfully
+    if (data.status !== "created") {
+      notify(data.status, data.message)
+      return
+    }
 
     saveBtn.innerHTML = '<i class="fas fa-save"></i> Save Changes';
     saveBtn.disabled = false;
